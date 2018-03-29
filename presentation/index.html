@@ -215,7 +215,7 @@
                     </section>
                     <section>
                         <h2>Spring Data JPA</h2>
-                        <h3>Autmatic Database Migrations</h3>
+                        <h3>Automatic Database Migrations</h3>
                         <img src="images/flyway.png" class="plain" width="40%">
                         <img src="images/liquibase.png" class="plain" width="40%">
                         <br><small><a href="https://flywaydb.org">https://flywaydb.org</a></small>
@@ -285,6 +285,118 @@
                 <section>
                     <section>
                         <h1>Spring Core Framework</h1>
+                    </section>
+                    <section>
+                        <h2>Simplify Java (Kotlin) Development</h2>
+                        <p>Lightweight development with POJOs</p>
+                        <p>Loose coupling through Dependency Injection</p>
+                        <p>Declarative programming</p>
+                        <p>Eliminating boilerplate code</p>
+                    </section>
+                    <section>
+                        <h2>Lightweight Development</h2>
+                        <h3>Plain Old Java Objects</h3>
+                        <h4>vs.</h4>
+                        <h3>Enterprise Java Beans (1.x)</h3>
+                    </section>
+                    <section>
+                        <h1>Dependency Injection (DI)</h1>
+                    </section>
+                    <section>
+                        <h2>SOLID</h2>
+                        <p style="color: darkblue"><strong style="font-size: 1.5em">S</strong>ingle Responsibility Principle</p>
+                        <p style="color: darkblue"><strong style="font-size: 1.5em">O</strong>pen/Closed Principle</p>
+                        <p style="color: darkblue"><strong style="font-size: 1.5em">L</strong>iskov's Substitution Principle</p>
+                        <p style="color: darkblue"><strong style="font-size: 1.5em">I</strong>nterface Segregation Principle</p>
+                        <p style="color: red"><strong style="font-size: 1.5em">D</strong>ependency Inversion Principle</p>
+                    </section>
+                    <section>
+                        <h2>Dependency Inversion Principle</h2>
+                        <p><em>Depend on abstractions, not on concretions</em></p>
+                        <img src="images/dependency_inversion.png" class="plain">
+                    </section>
+                    <section>
+                        <h2>Inversion of Control Patterns</h2>
+                        <p>Service Locator</p>
+                        <p>Dependency Injection</p>
+                        <br><small><a href="https://martinfowler.com/articles/injection.html">https://martinfowler.com/articles/injection.html</a></small>
+                    </section>
+                    <section>
+                        <h2>JSR 330 Dependency Injection</h2>
+                        <pre><code class="xml" data-trim>
+                            <dependency>
+                                <groupId>javax.inject</groupId>
+                                <artifactId>javax.inject</artifactId>
+                                <version>1</version>
+                            </dependency>
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Inject
+                            public void setMyService(MyService myService) {
+                               ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Spring Dependency Injection</h2>
+                        <pre><code class="java" data-trim>
+                            @Autowired
+                            public void setMyService(MyService myService) {
+                               ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Eliminate Boilerplate Code</h2>
+                    </section>
+                    <section>
+                        <h2>Pure JDBC Code</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               List&lt;Person&gt; result = new ArrayList<>();
+                               try (Connection conn = dataSource.getConnection()) {
+                                  statement = conn.prepareStatement(
+                                                "select * from person");
+                                  rs = statement.executeQuery();
+                                  while (rs.next()) {
+                                     person = new Person();
+                                     …
+                                     result.add(person);
+                                  }
+                               } catch (SQLException e) {…} finally {}
+                               return result;
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>JDBC Template (Java 7)</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               return jdbcTemplate.query("select * from person",
+                                 new RowMapper&lt;Person&gt;() {
+                                    @Override
+                                    public Person mapRow(ResultSet arg0, int arg1)
+                                            throws SQLException {
+                                       Person person = new Person();
+                                       …
+                                       return person;
+                                    }
+                                 });
+                           }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>JDBC Template (Java 8)</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               return jdbcTemplate.query("select * from person",
+                                      (rs, rowNum) ->  {
+                                         Person person = new Person();
+                                         …
+                                         return person;
+                               });
+                           }
+                        </code></pre>
                     </section>
                 </section>
 
