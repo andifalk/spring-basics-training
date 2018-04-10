@@ -416,9 +416,114 @@
                         <p>OAuth2RestTemplate</p>
                         <p>...</p>
                     </section>
+                    <section>
+                        <h2>Spring Core Modules</h2>
+                        <img src="images/spring_core_modules.png" class="plain">
+                    </section>
+                    <section>
+                        <h2>Spring Core Module Libraries</h2>
+                        <img src="images/spring-module-libs.png" class="plain">
+                        <p><small><a href="https://dzone.com/articles/automatic-module-name-calling-all-java-library-maintainers">Spring 5: Mapped as Java 9 Automatic Modules</a></small></p>
+                    </section>
+                    <section>
+                        <h1>Beans & Contexts</h1>
+                    </section>
                     <section data-background="images/javaee_app_server_container.png" data-background-size="80%">
                     </section>
                     <section data-background="images/spring_container.png" data-background-size="80%">
+                    </section>
+                    <section>
+                        <h2>A simple Spring Bean</h2>
+                        <pre><code class="java" data-trim>
+                            public interface BeanOne {
+                                String whoAmI();
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            public class BeanOneImpl implements BeanOne {
+
+                                private final BeanTwo beanTwo;
+
+                                public BeanOneImpl(BeanTwo beanTwo) {
+                                    this.beanTwo = beanTwo;
+                                }
+
+                                @Override
+                                public String whoAmI() {
+                                    return BeanOneImpl.class.getSimpleName()
+                                                + ": " + beanTwo.whoAmI();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>XML Application Context</h2>
+                        <pre><code class="xml" data-trim>
+                            <beans>
+                                <bean id="beanOne" class="com.example.beans.BeanOneImpl">
+                                    <constructor-arg ref="beanTwo"/>
+                                </bean>
+                                <bean id="beanTwo" class="com.example.beans.BeanTwoImpl">
+                                </bean>
+                            </beans>
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            public class XmlApplication {
+
+                                public static void main(String[] args) {
+                                    ApplicationContext ctx =
+                                            new ClassPathXmlApplicationContext(
+                                                "application.xml");
+                                    BeanOne beanOne = ctx.getBean(BeanOne.class);
+                                    beanOne.whoAmI();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Another simple Spring Bean</h2>
+                        <pre><code class="java" data-trim>
+                            public interface BeanOne {
+                                String whoAmI();
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Component public class BeanOneImpl implements BeanOne {
+                                private final BeanTwo beanTwo;
+
+                                @Autowired
+                                public BeanOneImpl(BeanTwo beanTwo) {
+                                    this.beanTwo = beanTwo;
+                                }
+
+                                @Override
+                                public String whoAmI() {
+                                    return BeanOneImpl.class.getSimpleName()
+                                                + ": " + beanTwo.whoAmI();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Java Application Context</h2>
+                        <pre><code class="java" data-trim>
+                            @ComponentScan(basePackages = "com.example")
+                            @Configuration
+                            public class ApplicationConfiguration {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            public class JavaApplication {
+
+                                public static void main(String[] args) {
+                                    ApplicationContext ctx
+                                            = new AnnotationConfigApplicationContext(
+                                                    ApplicationConfiguration.class);
+                                    BeanOne beanOne = ctx.getBean(BeanOne.class);
+                                    beanOne.whoAmI();
+                                }
+                            }
+                        </code></pre>
                     </section>
                 </section>
 
