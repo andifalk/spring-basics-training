@@ -6,6 +6,6 @@ Spring basics training is a one-day Spring Framework and Spring Boot training. I
 
 ## License
 
-MIT licensed
+Apache 2.0 licensed
 
 Copyright (c) by 2018 Andreas Falk
