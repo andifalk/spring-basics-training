@@ -298,6 +298,7 @@
                 <section>
                     <section>
                         <h1>Spring Core Framework</h1>
+                        <img src="images/spring-logo.png" class="plain" width="25%">
                     </section>
                     <section>
                         <h2>Simplify Java (Kotlin) Development</h2>
@@ -596,19 +597,16 @@
                         <h2>Stopping Lifecycle</h2>
                         <img src="images/spring_lifecycle_stop.png" class="plain" width="90%">
                     </section>
-
                 </section>
 
-                <!-- Spring Boot -->
+                <!-- Microservices -->
+
                 <section>
-                    <section>
-                        <h1>Spring Boot & Microservices</h1>
-                    </section>
                     <section>
                         <h1>Microservices</h1>
                         &ldquo;Agile SOA&rdquo;
                         <p><small><a href="http://isa-principles.org">http://isa-principles.org</a></small></p>
-                        <p><small><a href="https://www.youtube.com/watch?v=S_h1t9dG3yQ">Video: Beyond Microservices (W-JAX 2017, Eberhard Wolff)</a></small></p>
+                        <img src="images/microservices.png" class="plain" width="40%">
                     </section>
                     <section>
                         <h2>The Well Defined Monolith</h2>
@@ -655,6 +653,14 @@
                         <h2>Size of Microservices (IV)</h2>
                         <img src="images/microservice_natural_size.png" class="plain">
                     </section>
+                </section>
+
+                <!-- Cloud Native -->
+                <section>
+                    <section>
+                        <h1>Cloud Native</h1>
+                        <p><img src="images/12factor.png" class="plain" width="50%"></p>
+                    </section>
                     <section>
                         <h2>Cloud Native (I)</h2>
                         &ldquo;Cloud-native is an approach to building and running applications that fully exploits the advantages of the cloud computing delivery model.&rdquo;
@@ -682,12 +688,17 @@
                         <h2>Spring Cloud Native Stack</h2>
                         <p><img src="images/cloud_native_stack.png" class="plain" width="80%"></p>
                     </section>
+                </section>
+
+                <!-- Spring Boot -->
+                <section>
                     <section>
                         <h1>Spring Boot</h1>
+                        <img src="images/spring-boot-logo.png" class="plain" width="25%">
                     </section>
                     <section>
                         <p>https://start.spring.io</p>
-                        <p><img src="images/start_spring_io.png" class="plain" width="80%"></p>
+                        <p><img src="images/start_spring_io.png" width="100%"></p>
                     </section>
                     <section>
                         <h2>Spring CLI</h2>
@@ -707,7 +718,7 @@
                         <p><img src="images/spring_auto_config.png" class="plain" width="80%"></p>
                     </section>
                     <section>
-                        <h2>@SpringBootApplication</h2>
+                        <h2>Spring Boot Application</h2>
                         <pre><code class="java" data-trim>
                             package org.springframework.boot.autoconfigure;
 
@@ -719,6 +730,69 @@
                                 ...
                             }
                         </code></pre>
+                        <pre><code class="java" data-trim>
+                            @SpringBootApplication
+                            public class MyApplication {
+
+                                public static void main(String[] args) {
+                                    SpringApplication.run(
+                                         MyApplication.class, args);
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Auto Configuration</h2>
+                        <pre><code class="java" data-trim>
+                            @Configuration
+                            @ConditionalOnClass(Flyway.class)
+                            @ConditionalOnBean(DataSource.class)
+                            @ConditionalOnProperty(prefix = "spring.flyway",
+                                name = "enabled", matchIfMissing = true)
+                            @AutoConfigureAfter({ DataSourceAutoConfiguration.class,
+                            HibernateJpaAutoConfiguration.class })
+                            public class FlywayAutoConfiguration {
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Deactivate Auto Configuration</h2>
+                        <pre><code class="java" data-trim>
+                            @SpringBootApplication (
+                              exclude = DataSourceAutoConfiguration.class)
+                            public class MyApplication {
+
+                                public static void main(String[] args) {
+                                    SpringApplication.run(
+                                         MyApplication.class, args);
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Application Properties</h2>
+                        <pre><code class="properties" data-trim>
+                            spring.application.name=My App
+                            spring.main.show-banner=false
+                            server.port=8080
+                            spring.datasource.jdbc-url=jdbc:h2:mydb
+                            spring.datasource.username=sa
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Application Configuration (YAML)</h2>
+                        <pre><code class="yaml" data-trim>
+                            spring:
+                              application:
+                                name: My App
+                              main:
+                                show-banner: false
+                              datasource:
+                                jdbc-url: jdbc:h2:mydb
+                                username: sa
+                        </code></pre>
+                        <p><small>YAML=YAML Ain't Markup Language</small></p>
                     </section>
                     <section>
                         <h2>Make JAR not WAR</h2>
