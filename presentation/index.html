@@ -683,9 +683,50 @@
                         <p><img src="images/cloud_native_stack.png" class="plain" width="80%"></p>
                     </section>
                     <section>
+                        <h1>Spring Boot</h1>
+                    </section>
+                    <section>
+                        <p>https://start.spring.io</p>
+                        <p><img src="images/start_spring_io.png" class="plain" width="80%"></p>
+                    </section>
+                    <section>
+                        <h2>Spring CLI</h2>
+                        <p><a href="http://start.spring.io/spring.zip">https://start.spring.io/spring.zip</a></p>
+                        <pre><code class="bash" data-trim>
+                            $ spring init -d=web,security,jpa --build=gradle my-dir
+                            Using service at https://start.spring.io
+                            Project extracted to '/home/my-user/my-dir'
+                        </code></pre>
+                    </section>
+                    <section>
                         <h2>Spring Boot Components</h2>
                         <p><img src="images/spring_boot_components.png" class="plain"></p>
                     </section>
+                    <section>
+                        <h2>Auto Configuration</h2>
+                        <p><img src="images/spring_auto_config.png" class="plain" width="80%"></p>
+                    </section>
+                    <section>
+                        <h2>@SpringBootApplication</h2>
+                        <pre><code class="bash" data-trim>
+                            package org.springframework.boot.autoconfigure;
+
+                            ...
+                            @SpringBootConfiguration
+                            @EnableAutoConfiguration
+                            @ComponentScan
+                            public @interface SpringBootApplication {
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Make JAR not WAR</h2>
+                        <p><img src="images/make_jar_not_war.png" width="80%"></p>
+                    </section>
+
+
+
                 </section>
 
                 <!-- Spring Web -->
