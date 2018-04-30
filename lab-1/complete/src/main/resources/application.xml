@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="addressbook" class="com.example.beans.AddressBook">
+        <constructor-arg ref="addresslist"/>
+    </bean>
+
+    <util:list id="addresslist">
+        <bean class="com.example.beans.Address" scope="prototype">
+            <property name="firstName" value="Hans"/>
+            <property name="lastName" value="Mustermann"/>
+            <property name="street" value="Hauptstr.10"/>
+            <property name="zipCode" value="70159"/>
+            <property name="city" value="Stuttgart"/>
+            <property name="country" value="GERMANY"/>
+        </bean>
+        <bean class="com.example.beans.Address" scope="prototype">
+            <property name="firstName" value="Peter"/>
+            <property name="lastName" value="Maier"/>
+            <property name="street" value="Nebenstr.2"/>
+            <property name="zipCode" value="70159"/>
+            <property name="city" value="Stuttgart"/>
+            <property name="country" value="GERMANY"/>
+        </bean>
+        <bean class="com.example.beans.Address" scope="prototype">
+            <property name="firstName" value="Susanne"/>
+            <property name="lastName" value="Bauer"/>
+            <property name="street" value="Parkallee 233"/>
+            <property name="zipCode" value="80034"/>
+            <property name="city" value="München"/>
+            <property name="country" value="GERMANY"/>
+        </bean>
+    </util:list>
+
+</beans>
