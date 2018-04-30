@@ -25,6 +25,7 @@ hs_err_pid*
 
 .idea/
 .gradle/
+build/
 out/
 
 presentation/node_modules/
