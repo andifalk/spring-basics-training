@@ -108,31 +108,6 @@
                         <img src="images/spring_platform.png" class="plain" width="68%">
                     </section>
                     <section>
-                        <h2>Spring IO Platform</h2>
-                        <p>&ldquo;Production-Ready&rdquo; platform</p>
-                        <p>Certified for Java 7, Java 8 & Java 9</p>
-                        <p>Tested for 3rd party dependencies</p>
-                        <br>
-                        <small><a href="https://platform.spring.io/platform/">https://platform.spring.io/platform</a></small>
-                    </section>
-                    <section>
-                        <h2>Spring IO Platform</h2>
-                        <h4>Maven BOM</h4>
-                        <pre><code class="xml" data-trim>
-                            <dependencyManagement>
-                                <dependencies>
-                                    <dependency>
-                                        <groupId>io.spring.platform</groupId>
-                                        <artifactId>platform-bom</artifactId>
-                                        <version>Brussels-SR7</version>
-                                        <type>pom</type>
-                                        <scope>import</scope>
-                                    </dependency>
-                                </dependencies>
-                            </dependencyManagement>
-                        </code></pre>
-                    </section>
-                    <section>
                         <h2>Spring Boot</h2>
                         <p>Spring Auto-Configuration</p>
                         <p>&ldquo;Convention over Configuration&rdquo;</p>
@@ -162,20 +137,16 @@
                     </section>
                     <section>
                         <h2>Spring Integration</h2>
-                        <p>Implementation of well-known Enterprise Integration Patterns (EAI)</p>
+                        <p>Implementation of well-known EAI Patterns</p>
                         <p>Integration with External Systems</p>
                         <p>ReST/HTTP, Twitter, EMail, JMS, FTP, ...</p>
+                        <img src="images/eai_book.png" class="plain" width="23%">
                         <br><small><a href="https://projects.spring.io/spring-integration">https://projects.spring.io/spring-integration</a></small>
-                    </section>
-                    <section>
-                        <h2>Spring Integration</h2>
-                        <p>Enterprise Integration Patterns (EAI)</p>
-                        <img src="images/eai_book.png" class="plain" width="38%">
                     </section>
                     <section>
                         <h2>Spring Kafka</h2>
                         <p>Developing Kafka-based messaging solutions</p>
-                        <p>Add Kafka support to Spring Integration</p>
+                        <p>Adds Kafka support to Spring Integration</p>
                         <br><small><a href="https://projects.spring.io/spring-kafka/">https://projects.spring.io/spring-kafka</a></small>
                     </section>
                     <section>
@@ -228,7 +199,7 @@
                         <p>Data access for MongoDB document database</p>
                         <p>Mongo Template support</p>
                         <p>POJO centric model for interacting with a MongoDB DBCollection</p>
-                        <br><small><a href="https://start.spring.io">https://start.spring.io</a></small>
+                        <br><small><a href="https://projects.spring.io/spring-data-mongodb/">https://projects.spring.io/spring-data-mongodb</a></small>
                     </section>
                     <section>
                         <h2>Spring Data Redis</h2>
@@ -278,6 +249,7 @@
                         <h2>Reactor</h2>
                         <p>Reactive library for building non-blocking applications</p>
                         <p>Based on Reactive Streams Specification</p>
+                        <p>Base library for Spring WebFlux (Spring 5)</p>
                         <br><small><a href="https://projectreactor.io/">https://projectreactor.io</a></small>
                         <br><small><a href="https://www.reactive-streams.org/">https://www.reactive-streams.org</a></small>
                     </section>
@@ -455,6 +427,7 @@
                         <img src="images/spring-module-libs.png" class="plain">
                         <p><small><a href="https://dzone.com/articles/automatic-module-name-calling-all-java-library-maintainers">Spring 5: Mapped as Java 9 Automatic Modules</a></small></p>
                     </section>
+
                     <section>
                         <h1>Beans & Contexts</h1>
                     </section>
@@ -473,7 +446,10 @@
                         <p>Annotations (Component Scan)</p>
                     </section>
                     <section>
-                        <h2>A simple Spring Bean</h2>
+                        <h2>XML Configuration</h2>
+                    </section>
+                    <section>
+                        <h4>A simple Spring Bean</h4>
                         <pre><code class="java" data-trim>
                             public interface BeanOne {
                                 String whoAmI();
@@ -497,7 +473,7 @@
                         </code></pre>
                     </section>
                     <section>
-                        <h2>XML Application Context</h2>
+                        <h4>XML Application Context</h4>
                         <pre><code class="xml" data-trim>
                             <beans>
                                 <bean id="beanOne" class="com.example.beans.BeanOneImpl">
@@ -520,15 +496,19 @@
                             }
                         </code></pre>
                     </section>
+
                     <section>
-                        <h2>Another simple Spring Bean</h2>
+                        <h2>Java Configuration</h2>
+                    </section>
+                    <section>
+                        <h4>Another simple Spring Bean</h4>
                         <pre><code class="java" data-trim>
                             public interface BeanOne {
                                 String whoAmI();
                             }
                         </code></pre>
                         <pre><code class="java" data-trim>
-                            @Component public class BeanOneImpl implements BeanOne {
+                            public class BeanOneImpl implements BeanOne {
                                 private final BeanTwo beanTwo;
 
                                 @Autowired
@@ -545,7 +525,63 @@
                         </code></pre>
                     </section>
                     <section>
-                        <h2>Java Application Context</h2>
+                        <h4>Java Application Context</h4>
+                        <pre><code class="java" data-trim>
+                            @Configuration
+                            public class ApplicationConfiguration {
+                                @Bean
+                                public BeanOne beanOne() {
+                                    return new BeanOneImpl(beanTwo());
+                                }
+                                @Bean
+                                public BeanTwo beanTwo() {
+                                    return new BeanTwoImpl(...);
+                                }
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            public class JavaApplication {
+
+                                public static void main(String[] args) {
+                                    ApplicationContext ctx
+                                            = new AnnotationConfigApplicationContext(
+                                                    ApplicationConfiguration.class);
+                                    BeanOne beanOne = ctx.getBean(BeanOne.class);
+                                    beanOne.whoAmI();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Component Scan Configuration</h2>
+                    </section>
+                    <section>
+                        <h4>Another simple Spring Bean</h4>
+                        <pre><code class="java" data-trim>
+                            public interface BeanOne {
+                                String whoAmI();
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            public class BeanOneImpl implements BeanOne {
+                                private final BeanTwo beanTwo;
+
+                                @Autowired
+                                public BeanOneImpl(BeanTwo beanTwo) {
+                                    this.beanTwo = beanTwo;
+                                }
+                                @Override
+                                public String whoAmI() {
+                                    return BeanOneImpl.class.getSimpleName()
+                                                + ": " + beanTwo.whoAmI();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>Java Application Context</h4>
                         <pre><code class="java" data-trim>
                             @ComponentScan(basePackages = "com.example")
                             @Configuration
@@ -566,6 +602,38 @@
                         </code></pre>
                     </section>
                     <section>
+                        <h2>Annotations</h2>
+                        <p>@Component</p>
+                        <p>@Configuration</p>
+                        <p>@Service</p>
+                        <p>@Repository</p>
+                        <p>@Controller</p>
+                        <p>@RestController</p>
+                        <p><small><a href="https://github.com/spring-projects/spring-framework/wiki/Spring-Annotation-Programming-Model">Spring Annotation Programming Model</a></small></p>
+                    </section>
+
+                    <section>
+                        <h2>Composed Annotations</h2>
+                        <pre><code class="java" data-trim>
+                            @Transactional
+                            @Service
+                            @Target(TYPE)
+                            @Retention(RUNTIME)
+                            @Documented
+                            public @interface TransactionalService {
+                                ...
+                                @AliasFor(annotation = Transactional.class,
+                                    attribute = "propagation")
+                                Propagation propagation() default Propagation.REQUIRED;
+                            }
+                        </code></pre>
+                        <p><small><a href="https://github.com/sbrannen/spring-composed">https://github.com/sbrannen/spring-composed</a></small></p>
+                    </section>
+
+                    <section>
+                        <h1>Bean Scopes</h1>
+                    </section>
+                    <section>
                         <h2>General Bean Scopes</h2>
                         <p>Singleton</p>
                         <p>Prototype</p>
@@ -584,6 +652,178 @@
                         <p>Session</p>
                         <p>Global Session</p>
                         <p>Application</p>
+                    </section>
+
+                    <section>
+                        <h2>Advanced Bean Wiring</h2>
+                    </section>
+
+                    <section>
+                        <h3>What about multiple candidates?</h3>
+                        <pre><code class="java" data-trim>
+                            public interface Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            public class Harddisk implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            public class CompactDisc implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class BackupManager {
+                                private Storage storage;
+
+                                @Autowired
+                                public void setStorage(Storage storage) {
+                                    this.storage = storage;
+                                }
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Single Match expected!</h3>
+                        <pre><code class="java" data-trim>
+                            NoUniqueBeanDefinitionException:
+                                No qualifying bean of type 'com.example.beans.Storage'
+                                    available: expected single matching bean but found 2:
+                                        compactDisc,harddisk
+                                at org.springframework.beans.factory.config.
+                                        DependencyDescriptor.resolveNotUnique
+                                at org.springframework.beans.factory.support.
+                                        DefaultListableBeanFactory.doResolveDependency
+                                ...
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Possible Solutions</h2>
+                        <p>@Primary</p>
+                        <p>@Qualifier</p>
+                        <p>@Profile</p>
+                        <p>@Conditional</p>
+                    </section>
+
+                    <section>
+                        <h3>@Primary</h3>
+                        <pre><code class="java" data-trim>
+                            public interface Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Primary @Component
+                            public class Harddisk implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            public class CompactDisc implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class BackupManager {
+                                private Storage storage;
+
+                                @Autowired
+                                public void setStorage(Storage storage) {
+                                    this.storage = storage;
+                                }
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>@Qualifier</h3>
+                        <pre><code class="java" data-trim>
+                            public interface Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Qualifier("HD") @Component
+                            public class Harddisk implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Qualifier("CD") @Component
+                            public class CompactDisc implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class BackupManager {
+                                private Storage storage;
+
+                                @Qualifier("CD") @Autowired
+                                public void setStorage(Storage storage) {
+                                    this.storage = storage;
+                                }
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <p>-Dspring.profiles.active="dev"</p>
+                        <pre><code class="java" data-trim>
+                            public interface Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Profile("dev") @Component
+                            public class Harddisk implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Profile("prod") @Component
+                            public class CompactDisc implements Storage {
+                            }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class BackupManager {
+                                private Storage storage;
+
+                                @Autowired
+                                public void setStorage(Storage storage) {
+                                    this.storage = storage;
+                                }
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <p>@Conditional</p>
+                        <pre><code class="java" data-trim>
+                            @Target({ElementType.TYPE, ElementType.METHOD})
+                            @Retention(RetentionPolicy.RUNTIME)
+                            @Documented
+                            @Conditional(ProfileCondition.class)
+                            public @interface Profile {...}
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @Target({ ElementType.TYPE, ElementType.METHOD })
+                            @Retention(RetentionPolicy.RUNTIME)
+                            @Documented
+                            @Conditional(OnClassCondition.class)
+                            public @interface ConditionalOnClass {...}
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            package org.springframework.boot.autoconfigure.orm.jpa;
+
+                            @Configuration
+                            @ConditionalOnClass({ ..., EntityManager.class })
+                            @Conditional(HibernateEntityManagerCondition.class)
+                            public class HibernateJpaAutoConfiguration {...}
+                        </code></pre>
                     </section>
 
                     <section>
