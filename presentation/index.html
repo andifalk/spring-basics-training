@@ -1011,6 +1011,9 @@
                         </code></pre>
                     </section>
                     <section>
+                        <h1>Externalize Configuration</h1>
+                    </section>
+                    <section>
                         <h2>Application Properties</h2>
                         <pre><code class="properties" data-trim>
                             spring.application.name=My App
@@ -1035,12 +1038,122 @@
                         <p><small>YAML=YAML Ain't Markup Language</small></p>
                     </section>
                     <section>
+                        <h3>More Options</h3>
+                        <p><a href="">Configuration Server</a></p>
+                        <p><a href="">Vault Cloud</a></p>
+                    </section>
+                    <section>
+                        <h1>DevOps</h1>
+                    </section>
+                    <section>
+                        <h2>Deployment Options</h2>
+                        <p>Can be packaged as...</p>
+                        <span class="fragment" style="color:darkblue">Executable JAR</span>
+                        <span class="fragment">or as...</span>
+                        <span class="fragment" style="color:darkblue">(Executable) WAR</span>
+                        <p class="fragment" style="color: darkred"><strong>but...</strong></p>
+                    </section>
+                    <section>
                         <h2>Make JAR not WAR</h2>
                         <p><img src="images/make_jar_not_war.png" width="80%"></p>
                     </section>
+                    <section>
+                        <h1>Actuators</h1>
+                        <h3>Manage and monitor your application</h3>
+                    </section>
+                    <section>
+                        <h3>Exposure via..</h3>
+                        <p>HTTP</p>
+                        <p>JMX</p>
+                    </section>
+                    <section>
+                        <h3>Actuator Endpoints (Partly)</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Endpoint</th>
+                                <th>Description</th>
+                                <th>Enabled</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>beans</td>
+                                    <td>List of Spring beans</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>conditions</td>
+                                    <td>Evaluated auto-config</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>configprops</td>
+                                    <td>List of properties</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>health</td>
+                                    <td>Application health info</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>metrics</td>
+                                    <td>‘Metrics’ information</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>shutdown</td>
+                                    <td>Gracefully shutdown app</td>
+                                    <td>No</td>
+                                </tr>
+                                <tr>
+                                    <td>threaddump</td>
+                                    <td>Performs a thread dump</td>
+                                    <td>Yes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Health Actuator</h3>
+                        <p><small><a href="http://localhost:8080/actuator/health">http://localhost:8080/actuator/health</a></small></p>
+                        <pre><code class="json" data-trim>
+                            {
+                              "status": "UP",
+                              "details": {
+                                "mongo": {
+                                  "status": "UP",
+                                  "details": {
+                                    "version": "3.2.2"
+                                  }
+                                },
+                                "diskSpace": {
+                                  "status": "UP",
+                                  "details": {
+                                    ...
+                            }}}}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Custom Health Indicator</h3>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            public class BlobStorageHealthEndpoint
+                                    implements HealthIndicator {
 
+                                private CloudBlobClient cloudBlobClient;
+                                ...
 
-
+                                @Override
+                                public Health health() {
+                                    Health.Builder builder = Health.up();
+                                    ...
+                                    return builder.build();
+                                }
+                            }
+                        </code></pre>
+                    </section>
                 </section>
 
                 <!-- Spring Web -->
@@ -1065,6 +1178,21 @@
                         <p><img src="images/spring_data_repository_ddd.png" class="plain"></p>
                     </section>
                     <section>
+                        <h3>Data Access Abstraction</h3>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class PersonServiceImpl implements PersonService {
+                               @Autowired private PersonRepository personRepository;
+
+                               @Override
+                               public List&lt;Person&gt; findAll() {
+                                  return personRepository.findAll();
+                               }
+                            }
+                        </code></pre>
+                        <img src="images/spring_data_repository_abstraction.png" class="plain" width="80%">
+                    </section>
+                    <section>
                         <p><img src="images/spring_data_repository_hierarchy.png" class="plain"></p>
                     </section>
                     <section>
@@ -1074,10 +1202,98 @@
                         <p><img src="images/jpa_entity_hierarchy.png" class="plain"></p>
                     </section>
                     <section>
+                        <h3>JPA Entity</h3>
+                        <pre><code class="java" data-trim>
+                            @Entity
+                            public class Person
+                                    extends AbstractPersistable&lt;Long&gt; {
+
+                               private String firstName;
+                               private String lastName;
+                               private String yearOfBirth;
+
+                               public Person() {
+                                  super();
+                               }
+                               …
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Auditing</h2>
+                    </section>
+                    <section>
+                        <h3>Auditor</h3>
+                        <pre><code class="java" data-trim>
+                            public class SpringSecurityAuditorAware
+                               implements AuditorAware&lt;User&gt; {
+
+                               @Override
+                               public User getCurrentAuditor() {
+                                  Authentication authentication =
+                                     SecurityContextHolder
+                                        .getContext ().getAuthentication ();
+                                     …
+                               }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Audited JPA Entity</h3>
+                        <pre><code class="java" data-trim>
+                            @Entity
+                            public class Person
+                                extends AbstractAuditable&lt;User,Long&gt;  {
+
+                               private String firstName;
+                               private String lastName;
+                               private String yearOfBirth;
+                               …
+
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
                         <p><img src="images/spring_data_jpa_repositories.png" class="plain"></p>
                     </section>
+                    <section>
+                        <h3>CRUD Repository</h3>
+                        <p>Create/Read/Update/Delete</p>
+                        <pre><code class="java" data-trim>
+                            public interface CrudRepository&lt;T, ID&gt;
+                                    extends Repository&lt;T, ID&gt; {
+                                ...
+                                &lt;S extends T&gt; S save(S entity);
+                                Optional&lt;T&gt; findById(ID id);
+                                Iterable&lt;T&gt; findAll();
+                                long count();
+                                boolean existsById(ID id);
+                                void delete(T entity);
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Autogenerated Simple Queries</h3>
+                        <p>findByLastName()</p>
+                        <p>findByLastNameAndFirstName()</p>
+                        <p>findByFirstNameIgnoreCaseOrderByFirstName()</p>
+                        …
+                    </section>
+                    <section>
+                        <h3>Custom Queries</h3>
+                        <pre><code class="java" data-trim>
+                            public interface PersonRepository extends
+                               JpaRepository&lt;Person, Long&gt; {
 
+                                ...
 
+                               @Query("SELECT p FROM #{#entityName} p LEFT JOIN FETCH "
+                                            + "p.addresses WHERE p.id = :id")
+                                  Person findOneWithAddresses(@Param("id") Long id);
+                            }
+                        </code></pre>
+                    </section>
                 </section>
 
                 <!-- Spring Security -->
