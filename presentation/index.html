@@ -66,7 +66,7 @@
                         <h1>2004</h1>
                         <p>Published Spring 1.0</p>
                         <p>Java 1.3 & 1.4 compatible</p>
-                        <img src="images/spring_release1.png" class="plain" width="30%">
+                        <img src="images/spring_release1.png" class="plain" width="50%">
                     </section>
                     <section>
                         <h1>2006-2009</h1>
@@ -166,10 +166,6 @@
                         <br><small><a href="https://projects.spring.io/spring-framework/">https://projects.spring.io/spring-framework</a></small>
                     </section>
                     <section>
-                        <h3>Spring Web Stacks</h3>
-                        <br><img src="images/diagram-boot-reactor.svg" class="plain" width="65%">
-                    </section>
-                    <section>
                         <h1>Spring Data</h1>
                     </section>
                     <section>
@@ -264,6 +260,13 @@
                         <h2>Google Cloud</h2>
                         <img src="images/spring_boot_google.png" class="plain">
                     </section>
+                    <section>
+                        <h2>Spring Cloud Pipelines</h2>
+                        <p>Don't reinvent CI/CD pipelines for each project</p>
+                        <p>Provide templates with best practices for common deployment pipelines</p>
+                        <p>Supports Jenkins and Concourse CI</p>
+                        <br><small><a href="https://cloud.spring.io/spring-cloud-pipelines/">https://cloud.spring.io/spring-cloud-pipelines</a></small>
+                    </section>
                 </section>
 
                 <!-- Spring Overview -->
@@ -273,11 +276,9 @@
                         <img src="images/spring-logo.png" class="plain" width="25%">
                     </section>
                     <section>
-                        <h2>Simplify Java (Kotlin) Development</h2>
+                        <h2>Simplify Java (Kotlin) Development (Part 1)</h2>
                         <p>Lightweight development with POJOs</p>
                         <p>Loose coupling through Dependency Injection</p>
-                        <p>Declarative programming</p>
-                        <p>Eliminating boilerplate code</p>
                     </section>
                     <section>
                         <h2>Lightweight Development</h2>
@@ -318,11 +319,11 @@
                     <section>
                         <h2>JSR 330 Dependency Injection</h2>
                         <pre><code class="xml" data-trim>
-                            <dependency>
-                                <groupId>javax.inject</groupId>
-                                <artifactId>javax.inject</artifactId>
-                                <version>1</version>
-                            </dependency>
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;javax.inject&lt;/groupId&gt;
+                                &lt;artifactId&gt;javax.inject&lt;/artifactId&gt;
+                                &lt;version&gt;1&lt;/version&gt;
+                            &lt;/dependency&gt;
                         </code></pre>
                         <pre><code class="java" data-trim>
                             @Inject
@@ -340,84 +341,7 @@
                             }
                         </code></pre>
                     </section>
-                    <section>
-                        <h1>Declarative Programming</h1>
-                    </section>
-                    <section>
-                        <h2>Declarative Cross-Cutting Concerns</h2>
-                        <p>Aspect-Oriented Programming (AOP)</p>
-                        <p>Transaction Management</p>
-                        <p>Security</p>
-                        <p>Logging</p>
-                    </section>
-                    <section>
-                        <h3>Aspect-Oriented Programming</h3>
-                        <img src="images/aop.png" class="plain">
-                    </section>
-                    <section>
-                        <h2>Spring AOP vs. AspectJ</h2>
-                        <img src="images/spring_aop_aspectj.png" class="plain">
-                    </section>
-                    <section>
-                        <h1>Eliminate Boilerplate Code</h1>
-                    </section>
-                    <section>
-                        <h2>Pure JDBC Code</h2>
-                        <pre><code class="java" data-trim>
-                           public List&lt;Person&gt; findAll() {
-                               List&lt;Person&gt; result = new ArrayList<>();
-                               try (Connection conn = dataSource.getConnection()) {
-                                  statement = conn.prepareStatement(
-                                                "select * from person");
-                                  rs = statement.executeQuery();
-                                  while (rs.next()) {
-                                     person = new Person();
-                                     …
-                                     result.add(person);
-                                  }
-                               } catch (SQLException e) {…} finally {}
-                               return result;
-                            }
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>JDBC Template (Java 7)</h2>
-                        <pre><code class="java" data-trim>
-                           public List&lt;Person&gt; findAll() {
-                               return jdbcTemplate.query("select * from person",
-                                 new RowMapper&lt;Person&gt;() {
-                                    @Override
-                                    public Person mapRow(ResultSet arg0, int arg1)
-                                            throws SQLException {
-                                       Person person = new Person();
-                                       …
-                                       return person;
-                                    }
-                                 });
-                           }
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>JDBC Template (Java 8)</h2>
-                        <pre><code class="java" data-trim>
-                           public List&lt;Person&gt; findAll() {
-                               return jdbcTemplate.query("select * from person",
-                                      (rs, rowNum) ->  {
-                                         Person person = new Person();
-                                         …
-                                         return person;
-                               });
-                           }
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>Other Templates</h2>
-                        <p>TransactionTemplate</p>
-                        <p>JmsTemplate</p>
-                        <p>RestTemplate</p>
-                        <p>OAuth2RestTemplate</p>
-                        <p>...</p>
-                    </section>
+
                     <section>
                         <h2>Spring Core Modules</h2>
                         <img src="images/spring_core_modules.png" class="plain">
@@ -475,13 +399,13 @@
                     <section>
                         <h4>XML Application Context</h4>
                         <pre><code class="xml" data-trim>
-                            <beans>
-                                <bean id="beanOne" class="com.example.beans.BeanOneImpl">
-                                    <constructor-arg ref="beanTwo"/>
-                                </bean>
-                                <bean id="beanTwo" class="com.example.beans.BeanTwoImpl">
-                                </bean>
-                            </beans>
+                            &lt;beans&gt;
+                                &lt;bean id="beanOne" class="com.example.beans.BeanOneImpl"&gt;
+                                    &lt;constructor-arg ref="beanTwo"/&gt;
+                                &lt;/bean&gt;
+                                &lt;bean id="beanTwo" class="com.example.beans.BeanTwoImpl"&gt;
+                                &lt;/bean&gt;
+                            &lt;/beans&gt;
                         </code></pre>
                         <pre><code class="java" data-trim>
                             public class XmlApplication {
@@ -631,6 +555,39 @@
                     </section>
 
                     <section>
+                        <h1>Spring Lifecycle</h1>
+                    </section>
+                    <section>
+                        <h2>Starting Lifecycle</h2>
+                        <img src="images/spring_lifecycle_start.png" class="plain" width="85%">
+                    </section>
+                    <section>
+                        <h2>Stopping Lifecycle</h2>
+                        <img src="images/spring_lifecycle_stop.png" class="plain" width="90%">
+                    </section>
+                    <section>
+                        <h3>Lifecycle & SmartLifecycle</h3>
+                        <pre><code class="java" data-trim>
+                           public interface Lifecycle {
+                               void start();
+                               void stop();
+                               boolean isRunning();
+                           }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                           public interface Phased {
+                               int getPhase();
+                           }
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            public interface SmartLifecycle extends Lifecycle, Phased {
+                               boolean isAutoStartup();
+                               void stop(Runnable callback);
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
                         <h1>Bean Scopes</h1>
                     </section>
                     <section>
@@ -652,6 +609,154 @@
                         <p>Session</p>
                         <p>Global Session</p>
                         <p>Application</p>
+                    </section>
+
+                    <section>
+                        <h2>Simplify Java (Kotlin) Development (Part 2)</h2>
+                        <p>Declarative programming</p>
+                        <p>Eliminating boilerplate code</p>
+                        <p>Great testing support</p>
+                    </section>
+
+                    <section>
+                        <h1>Declarative Programming</h1>
+                    </section>
+                    <section>
+                        <h2>Declarative Cross-Cutting Concerns</h2>
+                        <p>Aspect-Oriented Programming (AOP)</p>
+                        <p>Transaction Management</p>
+                        <p>Security</p>
+                        <p>Logging</p>
+                    </section>
+                    <section>
+                        <h3>Declarative Transaction & Authorization</h3>
+                        <pre><code class="java" data-trim>
+                            @Service
+                            public class TaskService {
+                                ...
+                                @Transactional(propagation = Propagation.REQUIRES_NEW)
+                                @PreAuthorize("hasRole('USER')")
+                                public Task createTask(
+                                   ...
+                                }
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Aspect-Oriented Programming</h3>
+                        <img src="images/aop.png" class="plain">
+                    </section>
+                    <section>
+                        <h2>Spring AOP vs. AspectJ</h2>
+                        <img src="images/spring_aop_aspectj.png" class="plain">
+                    </section>
+                    <section>
+                        <h2>AspectJ Advice Annotations</h2>
+                        <p>@Before</p>
+                        <p>@AfterReturning</p>
+                        <p>@AfterThrowing</p>
+                        <p>@After</p>
+                        <p>@Around</p>
+                    </section>
+                    <section>
+                        <h3>Configure AspectJ Annotations Support</h3>
+                        <pre><code class="xml" data-trim>
+                            &lt;dependency&gt;
+                               &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+                               &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+                               &lt;version&gt;1.9.0&lt;/version&gt;
+                            &lt;/dependency&gt;
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            @SpringBootApplication
+                            @EnableAspectJAutoProxy
+                            public class SpringComponentsApplication {
+                                public static void main(String[] args) {
+                                    SpringApplication.run(
+                                        SpringComponentsApplication.class, args);
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>A Logging Aspect</h3>
+                        <pre><code class="java" data-trim>
+                            @Component
+                            @Aspect
+                            public class LoggingAspect {
+                            static final Logger LOG = LoggerFactory.getLogger(
+                                                        LoggingAspect.class);
+                               @Around("execution(* person.PersonService.*(..))")
+                               public Object logAction (ProceedingJoinPoint pjp)
+                                                        throws Throwable {
+                                  LOG.info("Calling {}.{}",
+                                    pjp.getTarget().getClass().getName(),
+                                    pjp.getSignature().getName());
+                                  return proceedingJoinPoint.proceed();
+                               }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h1>Eliminate Boilerplate Code</h1>
+                    </section>
+                    <section>
+                        <h2>Pure JDBC Code</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               List&lt;Person&gt; result = new ArrayList<>();
+                               try (Connection conn = dataSource.getConnection()) {
+                                  statement = conn.prepareStatement(
+                                                "select * from person");
+                                  rs = statement.executeQuery();
+                                  while (rs.next()) {
+                                     person = new Person();
+                                     …
+                                     result.add(person);
+                                  }
+                               } catch (SQLException e) {…} finally {}
+                               return result;
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>JDBC Template (Java 7)</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               return jdbcTemplate.query("select * from person",
+                                 new RowMapper&lt;Person&gt;() {
+                                    @Override
+                                    public Person mapRow(ResultSet arg0, int arg1)
+                                            throws SQLException {
+                                       Person person = new Person();
+                                       …
+                                       return person;
+                                    }
+                                 });
+                           }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>JDBC Template (Java 8)</h2>
+                        <pre><code class="java" data-trim>
+                           public List&lt;Person&gt; findAll() {
+                               return jdbcTemplate.query("select * from person",
+                                      (rs, rowNum) ->  {
+                                         Person person = new Person();
+                                         …
+                                         return person;
+                               });
+                           }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Other Templates</h2>
+                        <p>TransactionTemplate</p>
+                        <p>JmsTemplate</p>
+                        <p>RestTemplate</p>
+                        <p>OAuth2RestTemplate</p>
+                        <p>...</p>
                     </section>
 
                     <section>
@@ -711,7 +816,7 @@
                     </section>
 
                     <section>
-                        <h3>@Primary</h3>
+                        <p>@Primary</p>
                         <pre><code class="java" data-trim>
                             public interface Storage {
                             }
@@ -741,7 +846,7 @@
                     </section>
 
                     <section>
-                        <h3>@Qualifier</h3>
+                        <p>@Qualifier</p>
                         <pre><code class="java" data-trim>
                             public interface Storage {
                             }
@@ -827,16 +932,28 @@
                     </section>
 
                     <section>
-                        <h1>Spring Lifecycle</h1>
+                        <h2>Spring Expression Language (SpEL)</h2>
                     </section>
                     <section>
-                        <h2>Starting Lifecycle</h2>
-                        <img src="images/spring_lifecycle_start.png" class="plain" width="85%">
+                        <pre><code class="xml" data-trim>
+                            &lt;bean id="numberGuess" class="com.example.NumberGuess"&gt;
+                                &lt;property
+                                    name="randomNumber"
+                                    value="#{T(java.lang.Math).random() * 100.0}"/&gt;
+                            &lt;/bean&gt;
+                            &lt;bean id="shapeGuess" class="com.example.ShapeGuess"&gt;
+                                &lt;property
+                                    name="initialShapeSeed"
+                                    value="#{ numberGuess.randomNumber }"/&gt;
+                        </code></pre>
+                        <pre><code class="java" data-trim>
+                            ExpressionParser parser = new SpelExpressionParser();
+                            Expression expression = parser.parseExpression(
+                               "T(java.lang.Math).random() * 100.0");
+                            double value = (Double) expression.getValue();
+                        </code></pre>
                     </section>
-                    <section>
-                        <h2>Stopping Lifecycle</h2>
-                        <img src="images/spring_lifecycle_stop.png" class="plain" width="90%">
-                    </section>
+
                 </section>
 
                 <!-- Microservices -->
@@ -1161,6 +1278,10 @@
                     <section>
                         <h1>Spring Web</h1>
                     </section>
+                    <section>
+                        <h3>Spring Web Stacks</h3>
+                        <br><img src="images/diagram-boot-reactor.svg" class="plain" width="65%">
+                    </section>
                 </section>
 
                 <!-- Spring Data -->
@@ -1301,6 +1422,253 @@
                     <section>
                         <h1>Spring Security</h1>
                     </section>
+                    <section>
+                        <h1>Spring Security</h1>
+                        <h2>Secure By Default</h2>
+                        <p class="fragment">Authentication required for all HTTP endpoints</p>
+                        <p class="fragment">Session Fixation Protection</p>
+                        <p class="fragment">Session Cookie (HttpOnly, Secure)</p>
+                        <p class="fragment">CSRF Protection</p>
+                        <p class="fragment">Security Response Header</p>
+                    </section>
+                    <section>
+                        <h1>New in Spring Security 5</h1>
+                        <p class="fragment">Support for Reactive Web Applications</p>
+                        <p class="fragment">Support for OAuth 2.0 Client</p>
+                        <p class="fragment">Support for OpenID Connect 1.0, JWT and JOSE (JWS/JWE/JWK) Client</p>
+                    </section>
+                    <section>
+                        <h1>Authentication</h1>
+                        <h2>Who am I?</h2>
+                        <img src="images/detective.png" class="plain" width="30%">
+                        <h3>HTTP 401 - Unauthorized</h3>
+                    </section>
+                    <section>
+                        <h2>Basic Authentication</h2>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                        </code></pre>
+                        <pre><code class="http" data-trim>
+                            HTTP/1.1 401
+                            WWW-Authenticate: Basic realm="hello"
+                        </code></pre>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                            Authorization: Basic dXNlcjpzZWNyZXQ=
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Digest Authentication</h2>
+                        <pre><code class="http" data-trim>
+                            HTTP/1.1 401
+                            WWW-Authenticate: Digest realm="Hello", qop="auth",
+                                nonce="MTQ5NTczNzY5NDkzNTpiZmM1MTk4ZTZjMmFlNTk3OTIy...",
+                                stale="true"
+                        </code></pre>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                            Authorization: Digest username="user", realm="Hello",
+                                nonce="MTQ5NTczNzY5NDkzNTpiZmM1MTk4ZTZjMmFlNTk3OTIyM...",
+                                uri="/", response="e94ed21db74add38cb80a7e3758519e6",
+                                qop=auth, nc=00000001, cnonce="75467274b8e8bd72"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Form Based Login</h2>
+                        <pre><code class="http" data-trim>
+                            POST /login HTTP/1.1
+                            Host: localhost:8080
+                            Content-Type: application/x-www-form-urlencoded
+                            Cookie: JSESSIONID=14965E3A995DA1973F42F308D59727D4
+
+                            username=user&password=secret&submit=Login
+                        </code></pre>
+                        <pre><code class="http" data-trim>
+                            HTTP/1.1 302
+                            Set-Cookie: JSESSIONID=49C632387800316021BE804AB2F27C15;
+                                            Path=/; HttpOnly
+                        </code></pre>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                            Cookie: JSESSIONID=49C632387800316021BE804AB2F27C15
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Bearer Token</h2>
+                        <ul>
+                            <li>OAuth2</li>
+                            <li>OpenID Connect</li>
+                        </ul>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiI
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Other Authentication Mechanisms</h2>
+                        <ul>
+                            <li>X.509 Client Certificate</li>
+                            <li>SAML 2</li>
+                            <li>API Token</li>
+                            <li>...</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Authentication</h2>
+                        <h4>Stateful or Stateless?</h4>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Session Cookie</th>
+                                <th>Token (Bearer, JWT)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>With each Request <br>(on same domain)</td>
+                                <td>Manually as Header</td>
+                            </tr>
+                            <tr>
+                                <td>Potential CSRF!</td>
+                                <td>No CSRF possible</td>
+                            </tr>
+                            <tr>
+                                <td>One domain</td>
+                                <td>Cross domain (CORS)</td>
+                            </tr>
+                            <tr>
+                                <td>Sensitive Info (HTTPS)</td>
+                                <td>Sensitive Info (HTTPS)</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>HTTPS (SSL / TLS) !!</h1>
+                        <h3>Validation (Destination Host)</h3>
+                        <h3>Data Confidentiality (Encryption)</h3>
+                        <h3>Data Integrity (Hashing)</h3>
+                    </section>
+                    <section>
+                        <h2>HTTPS (SSL / TLS) !!</h2>
+                        <p>
+                            <a href="https://letsencrypt.org/">Let's Encrypt</a><br>
+                            <a href="https://www.cloudflare.com/">CloudFlare</a><br>
+                            <a href="https://http2.github.io/">HTTP/2</a>
+                        </p>
+                        <img src="images/chrome-not-secure.gif" width="62%" class="plain">
+                    </section>
+                    <section>
+                        <h3>OAuth 2 = Authorization</h3>
+                        <img src="images/oauth_roles.png" class="plain">
+                        <br>
+                        <small>
+                            <a href="https://tools.ietf.org/html/rfc6749">https://tools.ietf.org/html/rfc6749</a>
+                        </small>
+                    </section>
+                    <section>
+                        <h3>OpenID Connect = Authenticaton</h3>
+                        <img src="images/openid_roles.png" class="plain">
+                        <br>
+                        <small>
+                            <a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net</a>
+                        </small>
+                    </section>
+                    <section>
+                        <h3>JSON Web token (JWT)</h3>
+                        <h4>Base 64 Encoded JSON Formatted Value of...</h4>
+                        <p class="fragment">...Header</p>
+                        <p class="fragment">...Payload</p>
+                        <p class="fragment">...Signature</p>
+                        <pre><code class="http" data-trim>
+                            GET / HTTP/1.1
+                            Host: localhost:8080
+                            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N...
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>JSON Web Token (JWT)</h3>
+                        <p>Header</p>
+                        <pre><code class="json" data-trim>
+                            {
+                              typ: "JWT",
+                              alg: "RS256"
+                            }
+                        </code></pre>
+                        <p>Payload</p>
+                        <pre><code class="json" data-trim>
+                            {
+                              iss: "https://identity.example.com",
+                              aud: "my-client-id",
+                              exp: 1495782385,
+                              nonce: "N0.46824857243233511495739124749",
+                              iat: 1495739185,
+                              at_hash: "hC1NDSB8WZ9SnjXTid175A",
+                              sub: "mysubject",
+                              auth_time: 1495739185,
+                              email: "test@gmail.com"
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <img src="images/oauth_spring_roles.png" class="plain">
+                        <br>
+                        <small>
+                            <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2">http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2</a>
+                        </small>
+                    </section>
+                    <section>
+                        <h1>Authorization</h1>
+                        <h2>What can I access?</h2>
+                        <img src="images/tampons.jpg" class="plain" width="45%">
+                        <h3>HTTP 403 - Forbidden</h3>
+                    </section>
+                    <section>
+                        <h2>Authorization of REST API</h2>
+                        <h3>Role based</h3>
+                        <pre><code class="java" data-trim contenteditable>
+                            public class UserBoundaryService {
+
+                                @PreAuthorize("hasRole('ADMIN')")
+                                public List&lt;User&gt; findAllUsers() {...}
+
+                            }
+				    	</code></pre>
+                    </section>
+                    <section>
+                        <h2>Authorization of REST API</h2>
+                        <h3>Permission based</h3>
+                        <pre><code class="java" data-trim contenteditable>
+                            public class TaskBoundaryService {
+
+                                @PreAuthorize("hasPermission(#taskId, 'TASK', 'WRITE')")
+                                public Task findTask(UUID taskId) {...}
+
+                            }
+					    </code></pre>
+                    </section>
+                    <section>
+                        <h2>Authorization of REST API</h2>
+                        <h3>Integration Test</h3>
+                        <pre><code class="java" data-trim contenteditable>
+                            public class AuthorizationIntegrationTest {
+
+                                @WithMockUser(roles = "ADMIN")
+                                @Test
+                                public void verifyFindAllUsersAuthorized() {...}
+
+                                @WithMockUser(roles = "USER")
+                                @Test(expected = AccessDeniedException.class)
+                                public void verifyFindAllUsersUnauthorized() {...}
+
+                            }
+					    </code></pre>
+                    </section>
                 </section>
 
                 <!-- Spring Test -->
@@ -1308,6 +1676,22 @@
                     <section>
                         <h1>Spring Test</h1>
                     </section>
+                    <section>
+                        <p><img src="images/test_pyramid.png" class="plain"></p>
+                    </section>
+                    <section>
+                        <p><img src="images/unit_test_fast_feedback.png" class="plain"></p>
+                    </section>
+                    <section>
+                        <p><img src="images/junit_mockito.png" class="plain"></p>
+                    </section>
+                    <section>
+                        <p><img src="images/mocking.png" class="plain"></p>
+                    </section>
+                    <section>
+                        <p><img src="images/junit_eclipse.png" class="plain"></p>
+                    </section>
+
                 </section>
 
                 <!-- Spring 5 -->
@@ -1325,6 +1709,10 @@
                         <p><a href="https://akka.io">akka</a></p>
                         <p><a href="https://projectreactor.io">Reactor</a></p>
                         <p><a href="https://github.com/ReactiveX/RxJava">RxJava</a></p>
+                    </section>
+                    <section>
+                        <h3>Spring Web Stacks</h3>
+                        <br><img src="images/diagram-boot-reactor.svg" class="plain" width="65%">
                     </section>
                 </section>
 
