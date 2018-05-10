@@ -1155,6 +1155,41 @@
                         <p><small>YAML=YAML Ain't Markup Language</small></p>
                     </section>
                     <section>
+                        <h2>Configuration Naming Conventions</h2>
+                        <p>application.properties or application.yml (default)</p>
+                        <p>application-dev.properties (if &ldquo;dev&rdquo; profile is active)</p>
+                        <p>application-cloud.yml (if &ldquo;cloud&rdquo; profile is active)</p>
+                    </section>
+                    <section>
+                        <h2>Configuration Properties</h2>
+                        <pre><code class="java" data-trim>
+                            @ConfigurationProperties(prefix = "hosts")
+                            @Validated
+                            public class MyProperties {
+
+                                private Host host;
+                                ...
+                                public static class Host {
+                                    @NotNull
+                                    private String ip;
+                                    @Min(1)
+                                    private int port;
+                                    ...
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Configuration Properties</h2>
+                        <pre><code class="yaml" data-trim>
+                            hosts:
+                              host:
+                                ip: 192.168.0.1
+                                port: 8080
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Application Configuration</h2>
                         <h3>More Options</h3>
                         <p><a href="">Configuration Server</a></p>
                         <p><a href="">Vault Cloud</a></p>
@@ -1173,6 +1208,30 @@
                     <section>
                         <h2>Make JAR not WAR</h2>
                         <p><img src="images/make_jar_not_war.png" width="80%"></p>
+                    </section>
+                    <section>
+                        <h3>Spring Boot Build Plugin</h3>
+                        <p>Maven</p>
+                        <pre><code class="groovy" data-trim>
+                            &lt;plugin&gt;
+                                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                                &lt;version&gt;2.0.2.RELEASE&lt;/version&gt;
+                                &lt;executions&gt;
+                                    &lt;execution&gt;
+                                        &lt;goals&gt;
+                                            &lt;goal&gt;repackage&lt;/goal&gt;
+                                        &lt;/goals&gt;
+                                    &lt;/execution&gt;
+                                &lt;/executions&gt;
+                            &lt;/plugin&gt;
+                        </code></pre>
+                        <p>Gradle</p>
+                        <pre><code class="groovy" data-trim>
+                            plugins {
+                                id 'org.springframework.boot' version '2.0.2.RELEASE'
+                            }
+                        </code></pre>
                     </section>
                     <section>
                         <h1>Actuators</h1>
@@ -1281,6 +1340,93 @@
                     <section>
                         <h3>Spring Web Stacks</h3>
                         <br><img src="images/diagram-boot-reactor.svg" class="plain" width="65%">
+                    </section>
+                    <section>
+                        <h2>Spring MVC</h2>
+                    </section>
+                    <section>
+                        <h2>Model-View-Controller (MVC)</h2>
+                        <p>Strong separation between presentation (view & controller) and model</p>
+                        <p>Controller and view communicate through the model</p>
+                        <p>Observer pattern to update views on model changes</p>
+                        <p><small><a href="https://martinfowler.com/eaaDev/uiArchs.html#ModelViewController">https://martinfowler.com/eaaDev/uiArchs.html#ModelViewController</a></small></p>
+                    </section>
+                    <section>
+                        <h2>Front Controller</h2>
+                        <p>&ldquo;A controller that handles all requests for a Web site&rdquo;</p>
+                        <p><small><a href="https://martinfowler.com/eaaCatalog/frontController.html">https://martinfowler.com/eaaCatalog/frontController.html</a></small></p>
+                    </section>
+                    <section>
+                        <h3>Spring MVC Request Handling</h3>
+                        <br><img src="images/spring_mvc_requests.png" class="plain">
+                    </section>
+                    <section>
+                        <h2>Controller</h2>
+                        <pre><code class="java" data-trim>
+                            @Controller
+                            public class HomeController {
+                                @RequestMapping(value="/", method=GET)
+                                public String home() {
+                                    return "home";
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Request Mapping</h2>
+                        <pre><code class="java" data-trim>
+                            @RequestMapping(
+                                path="/",
+                                method = POST
+                                consumes = MediaType.APPLICATION_JSON_VALUE,
+                                produces = MediaType.APPLICATION_JSON_VALUE)</code></pre>
+                        <pre><code class="java" data-trim>
+                            @PostMapping(
+                                path="/",
+                                consumes = MediaType.APPLICATION_JSON_VALUE,
+                                produces = MediaType.APPLICATION_JSON_VALUE)</code></pre>
+                        <pre><code class="java" data-trim>
+                            @GetMapping(
+                                path="/",
+                                produces = MediaType.APPLICATION_JSON_VALUE)</code></pre>
+                    </section>
+                    <section>
+                        <h2>@ResponseBody</h2>
+                        <h3>Mapping for REST services</h3>
+                        <p>Indicates a method return value should be bound to the web response body</p>
+                    </section>
+                    <section>
+                        <p>@RestController =</p>
+                        <p>@Controller + @ResponseBody</p>
+                        <pre><code class="java" data-trim>
+                            @Target(ElementType.TYPE)
+                            @Retention(RetentionPolicy.RUNTIME)
+                            @Documented
+                            @Controller
+                            @ResponseBody
+                            public @interface RestController {
+                                ...
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>View Resolvers</h2>
+                        <p><img src="images/view_resolvers.png" class="plain"></p>
+                    </section>
+                    <section>
+                        <h2>View Technologies</h2>
+                        <p>Thymeleaf</p>
+                        <p>JSP & JSTL</p>
+                        <p>Jackson (JSON, XML)</p>
+                        <p>Script Views (e.g. React)</p>
+                        <p>PDF, Excel</p>
+                        <p>...</p>
+                    </section>
+                    <section>
+                        <h2>Other Web Frameworks</h2>
+                        <p>JavaServer Faces (JSF)</p>
+                        <p>Apache Struts</p>
+                        <p>Tapestry</p>
                     </section>
                 </section>
 
@@ -1423,19 +1569,57 @@
                         <h1>Spring Security</h1>
                     </section>
                     <section>
-                        <h1>Spring Security</h1>
-                        <h2>Secure By Default</h2>
-                        <p class="fragment">Authentication required for all HTTP endpoints</p>
-                        <p class="fragment">Session Fixation Protection</p>
-                        <p class="fragment">Session Cookie (HttpOnly, Secure)</p>
-                        <p class="fragment">CSRF Protection</p>
-                        <p class="fragment">Security Response Headers</p>
+                        <h2>Spring Security Features</h2>
+                        <p>Authentication</p>
+                        <p>Authorization</p>
+                        <p>Password Encoders</p>
+                        <p>Security Testing Support</p>
                     </section>
                     <section>
-                        <h1>New in Spring Security 5</h1>
-                        <p class="fragment">Support for Reactive Web Applications</p>
-                        <p class="fragment">Support for OAuth 2.0 Client</p>
-                        <p class="fragment">Support for OpenID Connect 1.0, JWT and JOSE (JWS/JWE/JWK) Client</p>
+                        <h2>New in Spring Security 5.0</h2>
+                        <p>Support for Reactive Web Applications</p>
+                        <p>Support for OAuth 2.0 Client</p>
+                        <p>Support for OpenID Connect 1.0, JWT and JOSE (JWS/JWE/JWK) Client</p>
+                    </section>
+                    <section>
+                        <h2>Spring Security</h2>
+                        <h4>Secure By Default</h4>
+                        <p>Authentication required for all HTTP endpoints</p>
+                        <p>Session Fixation Protection</p>
+                        <p>Session Cookie (HttpOnly, Secure)</p>
+                        <p>CSRF Protection</p>
+                        <p>Security Response Headers</p>
+                    </section>
+                    <section>
+                        <h2>Spring Security Auto Configuration</h2>
+                        <pre><code class="xml" data-trim>
+                            &lt;parent&gt;
+                                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+                                &lt;version&gt;2.0.2.RELEASE&lt;/version&gt;
+                                &lt;relativePath/&gt;
+                            &lt;/parent&gt;
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+                            &lt;/dependency&gt;
+                        </code></pre>
+                        <p>
+                            <small>
+                                <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2">Spring Boot 2.0 Reference Docs</a>
+                            </small>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Auto Generated Login Form & Credentials</h2>
+                        <pre><code data-trim>
+                            2018-05-10 20:11:24.505  INFO 28867 ---
+                                [main] .s.s.UserDetailsServiceAutoConfiguration :
+
+                            Using generated security password:
+                                4cb48dca-1c78-4dbb-85bc-a5200256105e
+                        </code></pre>
+                        <p><img src="images/generated_login_form.png" width="60%"></p>
                     </section>
                     <section>
                         <h1>Authentication</h1>
@@ -1478,6 +1662,83 @@
                             GET / HTTP/1.1
                             Host: localhost:8080
                             Cookie: JSESSIONID=49C632387800316021BE804AB2F27C15
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Configure Custom User Storage</h2>
+                        <pre><code class="java" data-trim>
+                            public class UserDetailsConfig {
+                                @Bean
+                                public PasswordEncoder passwordEncoder() {
+                                    return PasswordEncoderFactories
+                                        .createDelegatingPasswordEncoder();
+                                }
+                                @Bean
+                                public UserDetailsService userDetailsService() {
+                                    return new InMemoryUserDetailsManager(
+                                        User.builder().username("user@example.com")
+                                            .password(passwordEncoder().encode("secret"))
+                                                    .roles("USER").build()
+                                    );
+                            }}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Configure Custom Authentication</h2>
+                        <pre><code class="java" data-trim>
+                            class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+                                @Override
+                                protected void configure(
+                                        AuthenticationManagerBuilder auth) {
+                                    auth.userDetailsService(userDetailsService)
+                                            .passwordEncoder(passwordEncoder);
+                                }
+                                @Override
+                                protected void configure(HttpSecurity http) {
+                                    http.httpBasic().and().formLogin()
+                                        .and().authorizeRequests()
+                                            .antMatchers("/unrestricted").permitAll()
+                                            .anyRequest().authenticated();
+                            }}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Secure Passwords</h2>
+                        <h4>Password Encoder</h4>
+                        <pre><code class="java" data-trim>
+                            package org.springframework.security.crypto.password;
+
+                            public interface PasswordEncoder {
+
+                                String encode(CharSequence rawPassword);
+
+                                boolean matches(CharSequence rawPassword,
+                                                    String encodedPassword);
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Delegating Password Encoder</h4>
+                        <pre><code class="java" data-trim>
+                            public class PasswordEncoderFactories {
+                              public static PasswordEncoder
+                                      createDelegatingPasswordEncoder() {
+                                String encodingId = "bcrypt";
+                                Map&lt;String, PasswordEncoder&gt; encoders
+                                  = new HashMap&lt;&gt;();
+                                encoders.put(encodingId, new BCryptPasswordEncoder());
+                                encoders.put("ldap", new LdapShaPasswordEncoder());
+                                encoders.put("noop", NoOpPasswordEncoder.getInstance());
+                                encoders.put("pbkdf2", new Pbkdf2PasswordEncoder());
+                                encoders.put("scrypt", new SCryptPasswordEncoder());
+                                return new DelegatingPasswordEncoder(
+                                      encodingId, encoders);
+                            }}
+                        </code></pre>
+                        Passwords are stored this way
+                        <pre><code data-trim>
+                            {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQ...
                         </code></pre>
                     </section>
                     <section>
@@ -1532,19 +1793,29 @@
                         </table>
                     </section>
                     <section>
-                        <h1>HTTPS (SSL / TLS) !!</h1>
+                        <h1>HTTPS (SSL/TLS) !!</h1>
                         <h3>Validation (Destination Host)</h3>
                         <h3>Data Confidentiality (Encryption)</h3>
                         <h3>Data Integrity (Hashing)</h3>
                     </section>
                     <section>
-                        <h2>HTTPS (SSL / TLS) !!</h2>
+                        <h2>HTTPS (SSL/TLS) !!</h2>
                         <p>
                             <a href="https://letsencrypt.org/">Let's Encrypt</a><br>
                             <a href="https://www.cloudflare.com/">CloudFlare</a><br>
                             <a href="https://http2.github.io/">HTTP/2</a>
                         </p>
                         <img src="images/chrome-not-secure.gif" width="62%" class="plain">
+                    </section>
+                    <section>
+                        <h2>Enable SSL/TLS in Spring Boot</h2>
+                        <h4>Using Java Keystore</h4>
+                        <pre><code class="properties" data-trim>
+                            server.port=8443
+                            server.ssl.key-store=classpath:keystore.jks
+                            server.ssl.key-store-password=secret
+                            server.ssl.key-password=another-secret
+                        </code></pre>
                     </section>
                     <section>
                         <h3>OAuth 2 = Authorization</h3>
@@ -1599,17 +1870,58 @@
                         </code></pre>
                     </section>
                     <section>
-                        <img src="images/oauth_spring_roles.png" class="plain">
+                        <h2>Spring Security OAuth2 Module & Spring Boot 1.5</h2>
+                        <img src="images/oauth_spring_roles.png" class="plain" width="70%">
                         <br>
                         <small>
-                            <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2">http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2</a>
+                            <a href="https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2">Spring Boot 1.5 Reference Docs</a>
                         </small>
+                    </section>
+                    <section>
+                        <h2>Spring Security 5.0 OAuth2/OIDC Client & Spring Boot 2.0</h2>
+                        <pre><code class="xml" data-trim>
+                            ...
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+                            &lt;/dependency&gt;
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-security-oauth2-client&lt;/artifactId&gt;
+                            &lt;/dependency&gt;
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-security-oauth2-jose&lt;/artifactId&gt;
+                            &lt;/dependency&gt;
+                        </code></pre>
+                        <p>
+                        <small>
+                            <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2">Spring Boot 2.0 Reference Docs</a>
+                        </small>
+                        </p>
                     </section>
                     <section>
                         <h1>Authorization</h1>
                         <h2>What can I access?</h2>
                         <img src="images/tampons.jpg" class="plain" width="45%">
                         <h3>HTTP 403 - Forbidden</h3>
+                    </section>
+                    <section>
+                        <h2>Method Security</h2>
+                        <p>JSR 250: e.g. @RolesAllowed</p>
+                        <p>Spring Security: @Secured</p>
+                        <p>Method Security Expressions: e.g. @PreAuthorize</p>
+                    </section>
+                    <section>
+                        <h2>Configure Method Security</h2>
+                        <pre><code class="java" data-trim>
+                            @EnableGlobalMethodSecurity(prePostEnabled = true)
+                            public class WebSecurityConfig
+                                    extends WebSecurityConfigurerAdapter {
+                                ...
+                            }
+
+                        </code></pre>
                     </section>
                     <section>
                         <h2>Authorization of REST API</h2>
