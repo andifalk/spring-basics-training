@@ -1429,7 +1429,7 @@
                         <p class="fragment">Session Fixation Protection</p>
                         <p class="fragment">Session Cookie (HttpOnly, Secure)</p>
                         <p class="fragment">CSRF Protection</p>
-                        <p class="fragment">Security Response Header</p>
+                        <p class="fragment">Security Response Headers</p>
                     </section>
                     <section>
                         <h1>New in Spring Security 5</h1>
@@ -1457,23 +1457,6 @@
                             GET / HTTP/1.1
                             Host: localhost:8080
                             Authorization: Basic dXNlcjpzZWNyZXQ=
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>Digest Authentication</h2>
-                        <pre><code class="http" data-trim>
-                            HTTP/1.1 401
-                            WWW-Authenticate: Digest realm="Hello", qop="auth",
-                                nonce="MTQ5NTczNzY5NDkzNTpiZmM1MTk4ZTZjMmFlNTk3OTIy...",
-                                stale="true"
-                        </code></pre>
-                        <pre><code class="http" data-trim>
-                            GET / HTTP/1.1
-                            Host: localhost:8080
-                            Authorization: Digest username="user", realm="Hello",
-                                nonce="MTQ5NTczNzY5NDkzNTpiZmM1MTk4ZTZjMmFlNTk3OTIyM...",
-                                uri="/", response="e94ed21db74add38cb80a7e3758519e6",
-                                qop=auth, nc=00000001, cnonce="75467274b8e8bd72"
                         </code></pre>
                     </section>
                     <section>
@@ -1665,7 +1648,6 @@
                                 @WithMockUser(roles = "USER")
                                 @Test(expected = AccessDeniedException.class)
                                 public void verifyFindAllUsersUnauthorized() {...}
-
                             }
 					    </code></pre>
                     </section>
@@ -1677,32 +1659,268 @@
                         <h1>Spring Test</h1>
                     </section>
                     <section>
+                        <h2>Test Pyramid</h2>
                         <p><img src="images/test_pyramid.png" class="plain"></p>
                     </section>
                     <section>
+                        <h2>Why Unit Tests?</h2>
                         <p><img src="images/unit_test_fast_feedback.png" class="plain"></p>
                     </section>
                     <section>
-                        <p><img src="images/junit_mockito.png" class="plain"></p>
+                        <h2>What is a Unit Test?</h2>
+                        <p>White Box Test</p>
+                        <p>Runs Fast (only some milliseconds)</p>
+                        <p>Tests Public API methods in a single class</p>
+                        <p>Uses Mocking</p>
+                        <p><img src="images/junit_mockito.png" class="plain" width="30%"></p>
                     </section>
                     <section>
+                        <h2>What is a good Unit Test?</h2>
+                        <p>Repeatable (with same results)</p>
+                        <p>Isolated/Independent</p>
+                        <p>May Run Parallelized</p>
+                    </section>
+
+                    <section>
+                        <h3>&ldquo;AAA&rdquo; Unit Test Structure</h3>
+                        <pre><code class="java" data-trim>
+                            public class HelloWorldTest {
+                                private HelloWorld cut;
+
+                                @Before // --> Arrange
+                                public void setUp() {
+                                    cut = new HelloWorld();
+                                }
+
+                                @Test
+                                public void verifySayHello() {
+                                    String greeting = cut.sayHello("World"); // --> Act
+                                    assertThat("Should have got expected greeting",
+                                            greeting, is("Hallo World")); // --> Assert
+                            } }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Assertion Matchers</h2>
+                        <p><a href="http://hamcrest.org/">Hamcrest Matchers</a></p>
+                        <p><a href="https://joel-costigliola.github.io/assertj/">AssertJ Matchers</a></p>
+                    </section>
+
+                    <section>
+                        <h2>Hamcrest Matching</h2>
+                        <pre><code class="java" data-trim>
+                            import static org.hamcrest.Matchers.*;
+
+                            assertThat(frodo.getName(), is(equalTo(myBiscuit)));
+                            assertThat(frodo.getName(), is(not(equalTo(myBiscuit))));
+
+                            assertThat(frodo.getName(), startsWith("Fro"));
+                            assertThat(frodo.getName(), endsWith("do"));
+                            assertThat(frodo.getName(),
+                                            is(equalToIgnoringCase("frodo")));
+
+                            assertThat(fellowshipOfTheRing.size()), is(equalTo(9));
+                            assertThat(fellowshipOfTheRing), hasItems(frodo, sam));
+                            assertThat(fellowshipOfTheRing), not(hasItem(sauron));
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>AssertJ Matching</h2>
+                        <pre><code class="java" data-trim>
+                            import static org.assertj.core.api.Assertions.*;
+
+                            assertThat(frodo.getName()).isEqualTo("Frodo");
+                            assertThat(frodo).isNotEqualTo(sauron);
+
+                            assertThat(frodo.getName()).startsWith("Fro")
+                                                       .endsWith("do")
+                                                       .isEqualToIgnoringCase("frodo");
+
+                            assertThat(fellowshipOfTheRing).hasSize(9)
+                                                           .contains(frodo, sam)
+                                                           .doesNotContain(sauron);
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Mocking</h2>
                         <p><img src="images/mocking.png" class="plain"></p>
                     </section>
+
                     <section>
-                        <p><img src="images/junit_eclipse.png" class="plain"></p>
+                        <h2>Mock Types</h2>
+                        <p>Dummy</p>
+                        <p>Fake</p>
+                        <p>Mock</p>
+                        <p>Spy</p>
                     </section>
+
+                    <section>
+                        <h2>Mockito</h2>
+                        <p>Simple API</p>
+                        <p>Provides Mock and Spy</p>
+                        <p>Supports Call Verification</p>
+                        <p>Also mocks final/static methods (Mockito 2)</p>
+                        <br><small><a href="http://site.mockito.org/">http://site.mockito.org</a></small>
+                    </section>
+
+                    <section>
+                        <h2>Mockito Sample</h2>
+                        <pre><code class="java" data-trim>
+                            @RunWith(MockitoJUnitRunner.class)
+                            public class PersonServiceMockTest {
+                                @Mock
+                                private PersonDao personDao;
+                                @InjectMocks
+                                private PersonService cut;
+                                @Test
+                                public void verifySomething() {
+                                    when(personDao.findAll()).thenReturn(
+                                        Collections.singletonList(
+                                             new Person("firstName", "lastName")));
+                                    ...
+                                }
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Spring Unit Tests</h2>
+                        <p>Tests WITHOUT Spring-Container</p>
+                        <p>Mocks for PropertySource, Servlets, Reactive Web, ...</p>
+                        <p>ReflectionUtils</p>
+                        <p><small><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#unit-testing">Spring Framework Reference Docs</a></small></p>
+                    </section>
+
+                    <section>
+                        <h2>What is a Integration Test?</h2>
+                        <p>Integrated test of multiple units</p>
+                        <p>Medium runtime (minutes)</p>
+                        <p>Tests using external systems</p>
+                        <p>Partly uses mocking</p>
+                        <p><img src="images/integration_tests.png" class="plain" width="30%"></p>
+                    </section>
+
+                    <section>
+                        <h2>Spring Integration Tests</h2>
+                        <p>Tests WITH Spring-Container</p>
+                        <p>SpringJUnitRunner</p>
+                        <p>Caching for Spring Contexts</p>
+                        <p>Dependency Injection</p>
+                        <p>Mocked Beans</p>
+                        <p><small><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#integration-testing">Spring Framework Reference Docs</a></small></p>
+                    </section>
+
+                    <section>
+                        <h3>Sample Spring Integration Test</h3>
+                        <pre><code class="java" data-trim>
+                            @RunWith(SpringJUnitRunner.class)
+                            @SpringApplicationConfiguration(classes = Application.class)
+                            @TestPropertySource(properties=
+                                    {"timezone = GMT", "port: 8081"})
+                            @Sql({"/test-schema.sql", "/test-user-data.sql"})
+                            @Transactional
+                            public class ApplicationTests {
+                                @Autowired
+                                private ShopManagementService cut;
+
+                                @Test
+                                public void verifySomething() { cut.doSomething(); }
+                                …
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Spring (Boot) Test Slices</h3>
+                        <p>@WebMvcTest</p>
+                        <p>@WebFluxTest</p>
+                        <p>@DataJpaTest</p>
+                        <p>@DataMongoTest</p>
+                        <p>@RestClientTest</p>
+                        <p>...</p>
+                        <p><small><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing">Spring Boot Reference Docs</a></small></p>
+                    </section>
+
+                    <section>
+                        <h2>Test Driven Development (TDD)</h2>
+                        <p><img src="images/tdd_cycle.png" class="plain" width="60%"></p>
+                    </section>
+
+                    <section>
+                        <h3>TDD Workflows (Martin Fowler)</h3>
+                        <p>Cleanup (&ldquo;Boy Scout Rule&rdquo;)</p>
+                        <p>Code Comprehension</p>
+                        <p>Preparation For New Feature</p>
+                        <p>Planned (Long-Term) Refactoring</p>
+                        <p><img src="images/refactor_hats_fowler.png" class="plain" width="30%"></p>
+                    </section>
+
+
 
                 </section>
 
                 <!-- Spring 5 -->
                 <section>
                     <section>
-                        <h1>Spring 5.0</h1>
+                        <h1>Spring Boot 2.0 & Spring 5.0</h1>
+                    </section>
+                    <section>
+                        <h2>What's New?</h2>
+                        <p>Infrastructure Updates</p>
+                        <p>JUnit 5 Testing Support</p>
+                        <p>Functional Container Extensions</p>
+                        <p>Reactive Systems / WebFlux</p>
+                    </section>
+                    <section>
+                        <h2>Spring Infrastructure Updates</h2>
+                        <p>Java 8 Baseline</p>
+                        <p>Java 9 Automatic Modules</p>
+                        <p>Java EE 7 Baseline</p>
+                        <p>Java EE 8 Support (Servlet 4, Bean Validation 2.0)</p>
+                        <p>HTTP/2 Support (Servlet 4)</p>
+                    </section>
+                    <section>
+                        <h2>Spring Boot Infrastructure Updates</h2>
+                        <p>Jetty 9.4</p>
+                        <p>Tomcat 8.5</p>
+                        <p>Hibernate 5.2</p>
+                        <p>Hikari Connection Pool</p>
+                    </section>
+                    <section>
+                        <h2>JUnit 5</h2>
+                        <p>Test Context Support for JUnit 4 and JUnit 5</p>
+                        <p>@SpringJUnitConfig = @ExtendWith(SpringExtension.class) + @ContextConfiguration</p>
+                    </section>
+                    <section>
+                        <h2>Functional Container Extensions</h2>
+                        <pre><code class="java" data-trim>
+                            GenericApplicationContext ctx
+                                = new GenericApplicationContext();
+
+                            // Default constructor via reflection
+                            ctx.registerBean(First.class);
+
+                            // Explicit constructor via Supplier
+                            ctx.registerBean(Second.class,
+                            () -> new Second(ctx.getBean(First.class)));
+
+                            // Explicit constructor with BeanDefinition customization
+                            ctx.registerBean(Third.class,
+                            () -> new Third(ctx.getBean(First.class)),
+                            bd -> bd.setLazyInit(true));
+                        </code></pre>
                     </section>
                     <section>
                         <h2>Reactive Systems</h2>
                         &ldquo;Systems that are Responsive, Resilient, Elastic and Message Driven. We call these Reactive Systems.&rdquo;
                         <p><small><a href="https://www.reactivemanifesto.org">The Reactive Manifesto</a></small></p>
+                    </section>
+                    <section>
+                        <h2>Reactive Streams & Backpressure</h2>
+                        <p><img src="images/reactive_publisher_subscriber.png" class="plain"></p>
                     </section>
                     <section>
                         <h2>Reactive Systems Implementations</h2>
