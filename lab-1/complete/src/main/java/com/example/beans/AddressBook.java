@@ -7,20 +7,20 @@ import java.util.List;
 
 public class AddressBook {
 
-    private List<? extends Address> addresses;
+    private List<? extends Person> addresses;
 
     public AddressBook() {
     }
 
-    public AddressBook(List<? extends Address> addresses) {
+    public AddressBook(List<? extends Person> addresses) {
         this.addresses = addresses;
     }
 
-    public List<? extends Address> getAddresses() {
+    public List<? extends Person> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<? extends Address> addresses) {
+    public void setAddresses(List<? extends Person> addresses) {
         this.addresses = addresses;
     }
 

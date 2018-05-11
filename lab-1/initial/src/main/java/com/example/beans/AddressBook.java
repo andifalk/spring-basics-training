@@ -2,27 +2,25 @@ package com.example.beans;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class AddressBook {
 
-    private List<? extends Address> addresses;
+    private List<? extends Person> addresses;
 
     public AddressBook() {
     }
 
-    public AddressBook(List<? extends Address> addresses) {
+    public AddressBook(List<? extends Person> addresses) {
         this.addresses = addresses;
     }
 
-    public List<? extends Address> getAddresses() {
+    public List<? extends Person> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<? extends Address> addresses) {
+    public void setAddresses(List<? extends Person> addresses) {
         this.addresses = addresses;
     }
 

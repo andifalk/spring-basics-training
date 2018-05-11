@@ -3,7 +3,7 @@ package com.example.beans;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Address {
+public class Person {
 
     private String firstName;
     private String lastName;
@@ -12,7 +12,7 @@ public class Address {
     private String city;
     private Country country;
 
-    public Address() {
+    public Person() {
         super();
     }
 

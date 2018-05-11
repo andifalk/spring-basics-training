@@ -27,5 +27,3 @@ hs_err_pid*
 .gradle/
 build/
 out/
-
-presentation/node_modules/

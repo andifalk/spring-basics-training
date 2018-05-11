@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springVersion = '5.0.4.RELEASE'
+        springVersion = '5.0.6.RELEASE'
     }
 }
 
@@ -12,7 +12,6 @@ group 'com.example'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
 
 repositories {
     mavenCentral()
