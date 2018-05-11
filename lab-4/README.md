@@ -5,7 +5,7 @@ After completing this lab you should know the basics of implementing an aspect u
 
 ## Initial code
 
-In the _initial_ project you find the following spring bean classes (PoJo's) to build the lifecycle application:
+In the _initial_ project you find the following spring bean classes (PoJo's) to build this application:
 
 * MyBeanOne: A bean implementing an advice for
 * MyBeanTwo: Another bean implementing an advice for
