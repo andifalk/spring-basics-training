@@ -9,7 +9,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 
 @Component
 @Scope(SCOPE_PROTOTYPE)
-public class Address {
+public class Person {
 
     private String firstName;
     private String lastName;
@@ -18,7 +18,7 @@ public class Address {
     private String city;
     private Country country;
 
-    public Address() {
+    public Person() {
         super();
     }
 
