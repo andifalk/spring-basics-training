@@ -23,9 +23,9 @@ __Table of Contents:__
     1. [Beans and Application Context (XML)](https://github.com/andifalk/spring-basics-training/tree/master/lab-1)
     2. [Beans and Application Context (Java Annotations, Component Scanning)](https://github.com/andifalk/spring-basics-training/tree/master/lab-2) 
     3. [Lifecycle of Spring Beans](https://github.com/andifalk/spring-basics-training/tree/master/lab-3)	
-    4. [Advanced Bean Wiring (Qualifier, Profile)](https://github.com/andifalk/spring-basics-training/tree/master/lab-4)
-    5. Aspect Oriented Programming (Just some basics)
-    6. Spring Expression Language (SpEL)
+    4. [Aspect Oriented Programming (Just some basics)](https://github.com/andifalk/spring-basics-training/tree/master/lab-4)
+    5. [Advanced Bean Wiring (Qualifier, Profile)](https://github.com/andifalk/spring-basics-training/tree/master/lab-5)
+    6. [Spring Expression Language (SpEL)](https://github.com/andifalk/spring-basics-training/tree/master/lab-6)
 2. Spring Boot Labs
     1. Create a new App using [start.spring.io](https://start.spring.io)
     2. Externalized Configuration (Property and YAML)
@@ -39,9 +39,9 @@ __Table of Contents:__
 5.  Spring Security Labs
     1. Authentication
     2. Authorization
-6.  Testing Labs   
+6.  Testing Labs
     1. Unit Tests
-    2. Integration Test Slices         
+    2. Integration Test Slices
 
 ## License
 
