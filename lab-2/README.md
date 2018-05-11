@@ -1,4 +1,4 @@
-# Lab 1: Beans and Application Context (Java)
+# Lab 2: Beans and Application Context (Java)
 In this lab we learn how to build a basic spring application using the java application context configuration.
 
 After completing this lab you should know how to create a basic spring application
