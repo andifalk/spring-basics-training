@@ -27,7 +27,7 @@ __Table of Contents:__
     5. [Advanced Bean Wiring (Qualifier, Profile)](https://github.com/andifalk/spring-basics-training/tree/master/lab-5)
     6. [Spring Expression Language (SpEL)](https://github.com/andifalk/spring-basics-training/tree/master/lab-6)
 2. Spring Boot Labs
-    1. Create a new App using [start.spring.io](https://start.spring.io)
+    1. [Create a new App using 'start.spring.io'](https://github.com/andifalk/spring-basics-training/tree/master/lab-7)
     2. Externalized Configuration (Property and YAML)
     3. DevOps: Logging and Monitoring (Actuator)
 3.  Spring Data Labs
