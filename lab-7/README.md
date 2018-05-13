@@ -3,6 +3,7 @@ In this lab we start using Spring Boot and generate an initial new application u
 or the corresponding spring initialzr wizards in your IDE.
 
 After completing this lab you should know how to create a full stack application with spring boot in just some minutes.
+This basic application already includes production ready monitoring features with the spring boot actuator.
 
 ## Initial code
 
@@ -28,7 +29,7 @@ Please note: When you have generated your application following the steps below 
     * Dependencies = `Web`, `DevTools`, `Configuration Processor` and `Actuator`
 
     ![foo](start_spring_io.png "title")
-
+    
 3. Generate the project (if you did NOT use an IDE wizard 
 you have to unzip the downloaded file and import the extracted contents into your IDE)   
 
@@ -41,17 +42,32 @@ you have to unzip the downloaded file and import the extracted contents into you
     
     Also new dependencies have been added:
     
-    ` compile('org.springframework.boot:spring-boot-starter-actuator')
+    ``` 
+      compile('org.springframework.boot:spring-boot-starter-actuator')
       compile('org.springframework.boot:spring-boot-starter-web')
       runtime('org.springframework.boot:spring-boot-devtools')
       compileOnly('org.springframework.boot:spring-boot-configuration-processor')
       testCompile('org.springframework.boot:spring-boot-starter-test')
-    ` 
+    ``` 
 
-4. Start the application using `InitialApplication` class. 
-After some seconds you have your first running application. This application does not do pretty much for now 
+5. Add the following code to the *InitialApplication* class:
 
-5. Now you are ready to start over with this first spring boot application. 
+    ``` 
+    @RestController
+    public static class DemoController {
+
+        @GetMapping("/")
+        public String hello() {
+          return "Hello Spring Boot";
+        }    
+    }
+    ``` 
+
+6. Start the application using *InitialApplication* class. 
+After some seconds you have your first running application. This application does not do pretty much for now.
+Browse to [localhost:8080](http://localhost:8080) then you should see `Hello Spring Boot` on the screen. 
+
+7. Now you are ready to start over with this first spring boot application. 
 We will continue to work on this application in next labs and add more and more functionality to this. 
 
 ***Tip:***
