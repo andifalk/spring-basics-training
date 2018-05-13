@@ -93,6 +93,9 @@ To do this just add the following entries to the *application.yml*:
       }
     ```
     
+    ***Note***: In production you must secure most of the actuator endpoints as these provide sensitive information
+    that can be used by hackers in trying to attack your application! We will add security in the spring security lab section.
+    
 3. Now we will add our own custom health endpoint indicator. 
 Create a new class called *MyHealthEndpoint* in package *com.example*. Put the following code into this class:
 
