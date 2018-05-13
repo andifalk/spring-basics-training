@@ -1,0 +1,7 @@
+server:
+  port: 9090
+myprops:
+  message: 'hello from configuration'
+info:
+  application:
+    name: MyPropertiesApp

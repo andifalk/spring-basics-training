@@ -13,7 +13,9 @@ In the _complete_ project you find the generated spring boot project with follow
 
 * CompleteApplication: This is the generated starter class to start the spring boot application (contains a main() method).
 Please note: When you have generated your application following the steps below you will get same start class but with name *InitialApplication*
+* DemoRestController: A sample spring controller defining a simple REST interface.
 * application.properties: This is the generated default application configuration properties file
+* CompleteApplicationTests: A sample spring integration test just verifying a successful start of the spring application
  
 ## Steps to complete
 
@@ -50,17 +52,17 @@ you have to unzip the downloaded file and import the extracted contents into you
       testCompile('org.springframework.boot:spring-boot-starter-test')
     ``` 
 
-5. Add the following code to the *InitialApplication* class:
+5. Add a new class *DemoRestController* with following code to the *com.example* package:
 
     ``` 
-    @RestController
-    public static class DemoController {
-
-        @GetMapping("/")
-        public String hello() {
-          return "Hello Spring Boot";
-        }    
-    }
+        @RestController
+        public class DemoRestController {
+            
+            @GetMapping("/")
+            public String hello() {
+                return "Hello Spring Boot";
+            }
+        }
     ``` 
 
 6. Start the application using *InitialApplication* class. 
