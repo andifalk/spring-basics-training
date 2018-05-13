@@ -1,0 +1,17 @@
+info:
+  application:
+    name: MyActuatorApp
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+logging:
+  level:
+    com:
+      example: trace
+    org:
+      springframework: debug

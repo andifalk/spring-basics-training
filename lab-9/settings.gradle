@@ -1,0 +1,4 @@
+rootProject.name = 'lab-9'
+
+include 'complete', 'initial'
+
