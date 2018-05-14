@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    show-sql: true
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa:
+            JpaTransactionManager: trace

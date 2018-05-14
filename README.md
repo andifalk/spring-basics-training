@@ -31,7 +31,7 @@ __Table of Contents:__
     2. [Externalized Configuration (Property and YAML)](https://github.com/andifalk/spring-basics-training/tree/master/lab-8)
     3. [DevOps: Logging and Monitoring (Actuator)](https://github.com/andifalk/spring-basics-training/tree/master/lab-9)
 3.  Spring Data Labs
-    1. Spring Data JPA
+    1. [Spring Data JPA](https://github.com/andifalk/spring-basics-training/tree/master/lab-10)
     2. Flyway Database Migrations
 4.  Spring MVC Labs
     1. RESTful Services
