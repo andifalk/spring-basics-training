@@ -58,7 +58,7 @@ In the browser window you should see a list of provided actuator endpoints.
     We will change this behaviour as well in the next step. 
     
 2. Now it is time to enable more actuator endpoints and also show more details in health endpoint. 
-To do this just add the following entries to the *application.yml*:   
+To do this just add the following entries to the *application.yml*:
 
     ```
         management:
@@ -148,7 +148,7 @@ Create a new class called *MyHealthEndpoint* in package *com.example*. Put the f
 4. In this step we will add a custom actuator endpoint exposed to the web. To achieve this 
 create a new class *MyCustomEndpoint* in package *com.example* with the following contents:
 
-    ```    
+    ```
         @Component
         @WebEndpoint(id = "custom")
         public class MyCustomEndpoint {
@@ -206,7 +206,7 @@ to following settings:
               example: trace
             org:
               springframework: debug
-    ```         
+    ```
 
     After making these changes and restarting the application the logging output we put in during this lab
     is appearing in the console. 
@@ -214,4 +214,4 @@ to following settings:
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project

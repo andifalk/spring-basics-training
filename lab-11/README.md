@@ -19,7 +19,7 @@ In the _complete_ project you find the spring boot project containing the data a
     * Person: Persistent *Person* entity
     * Address: Persistent *Address* entity
     * Country: An enum for countries (used in *Address*)
-* V01_InitialSchema.sql: The flyway db migration script (executed automatically at application start)    
+* V01_InitialSchema.sql: The flyway db migration script (executed automatically at application start)
 * application.yml: Externalized (default) configuration for the application in YAML format
  
 ## Steps to complete
@@ -37,13 +37,13 @@ Select all these statements and copy these into the already existing file *V01_I
         Hibernate: create table person_addresses(...)    
         Hibernate: alter table address drop constraint...
         ...
-    ```    
+    ```
     
 2. Now remove the following line from *application.yml* (this did the auto-generation for ddl so far) or set it to *false*:
 
     `generate-ddl: true`
     
-    After doing this restart the application, then flyway takes over database migration instead of the hibernate auto-generation.  
+    After doing this restart the application, then flyway takes over database migration instead of the hibernate auto-generation.
     
 3. Now let us look again into the in-memory database using the h2 console. To perform this just browse to 
 [localhost:8080/h2-console](http://localhost:8080/h2-console). Make sure that the following settings are in the login dialog:
@@ -60,4 +60,4 @@ Select all these statements and copy these into the already existing file *V01_I
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup)
 or the [Flyway DB Docs](https://flywaydb.org/documentation/). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project

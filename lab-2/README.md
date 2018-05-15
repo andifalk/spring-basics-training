@@ -4,7 +4,7 @@ In this lab we learn how to build a basic spring application using the java appl
 After completing this lab you should know how to create a basic spring application
 using the java application context for beans configuration. This includes also component scanning of beans.
 
-Additionally you learn the difference between the two main bean scopes _singleton_ and _prototype_.  
+Additionally you learn the difference between the two main bean scopes _singleton_ and _prototype_.
 
 ## Initial code
 
@@ -21,7 +21,7 @@ In addition you also find the following:
  
 ## Steps to complete
 
-1. Change beans for _AddressBook_ and _Person_ so that these are detected by component scanning   
+1. Change beans for _AddressBook_ and _Person_ so that these are detected by component scanning
 (Please note that multiple instances of a _Person_ are required, you can use the _@Scope_ annotation here).
 
 2. Configure the _ComponentScanConfiguration_ to enable component scannning (use _@ComponentScan_ annotation).
@@ -34,5 +34,5 @@ get an instance of _AddressBook_ from the instantiated context and print it to s
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-classpath-scanning). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 

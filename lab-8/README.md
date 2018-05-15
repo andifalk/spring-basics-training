@@ -34,12 +34,12 @@ add the following to this file:
     ```
     server:
         port: 9090
-    ```        
+    ```
     
     If you start the application now you have to browse to [localhost:9090](http://localhost:9090).
     
 3. In this step we want to add some predefined actuator property. To do this just add the following to the 
-*application.yml*   
+*application.yml*
 
     ```
     info:
@@ -99,7 +99,7 @@ Create a new class called *MyConfigurationProperties* in package *com.example*. 
     So the validation failed because this new property is missing in *application.yml*.
     Just add the following to *application.yml*:
 
-    ```    
+    ```
     myprops:
       message: 'hello from configuration'
     ```
@@ -110,7 +110,7 @@ Create a new class called *MyConfigurationProperties* in package *com.example*. 
 this class and the contained property accessible to the application you have to add the following to the main class
 *InitialApplication*:
 
-    ```    
+    ```
     @EnableConfigurationProperties(MyConfigurationProperties.class)
     public class CompleteApplication {
     ...
@@ -142,7 +142,7 @@ this class and the contained property accessible to the application you have to 
     
     We inject an instance of the new configuration class *MyConfigurationProperties* to access the `message` property
     and we inject the other property `info.application.name` by using the *@Value* annotation. These are the two usual ways to
-    access configuration properties in a spring boot application.  
+    access configuration properties in a spring boot application.
 
 7. Start the application using *InitialApplication* class. 
 After some seconds you have your first running application. This application does not do pretty much for now.
@@ -155,7 +155,7 @@ with following contents:
     ```
     server:
         port: 10001
-    ```   
+    ```
 
 Now restart the application with specifying the VM property *-Dspring.profiles.active=dev*. As the server port should now be
 configured to `10001` you should be able to access the application using [localhost:10001](http://localhost:10001) and the log output should
@@ -165,5 +165,5 @@ If you restart again without specifying this vm property then it should again be
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 

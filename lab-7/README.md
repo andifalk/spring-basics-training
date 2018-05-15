@@ -33,7 +33,7 @@ Please note: When you have generated your application following the steps below 
     ![foo](start_spring_io.png "title")
     
 3. Generate the project (if you did NOT use an IDE wizard 
-you have to unzip the downloaded file and import the extracted contents into your IDE)   
+you have to unzip the downloaded file and import the extracted contents into your IDE)
 
 4. Open the *build.gradle* file. Here you will notice some new entries.
 
@@ -75,5 +75,5 @@ We will continue to work on this application in next labs and add more and more 
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-first-application). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 

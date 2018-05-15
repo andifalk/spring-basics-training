@@ -4,7 +4,7 @@ In this lab we learn how to build a basic spring application using the xml appli
 After completing this lab you should know how to create a basic spring application
 using the xml application context for beans configuration.
 
-Additionally you learn the difference between the two main bean scopes _singleton_ and _prototype_.  
+Additionally you learn the difference between the two main bean scopes _singleton_ and _prototype_.
 
 ## Initial code
 
@@ -31,5 +31,5 @@ get an instance of _AddressBook_ from the instanciated context and print it to s
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-instantiation). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 

@@ -29,7 +29,7 @@ In the _complete_ project you find the spring boot project containing the data a
     
     Attribute  | Type          | Constraints
     -----------|---------------|--------------------
-    identifier | UUID          | Not null, unique   
+    identifier | UUID          | Not null, unique
     firstName  | String        | Length=50, Not null
     lastName   | String        | Length=50, Not null
     addresses  | List<Address> | Cascade=all
@@ -38,7 +38,7 @@ In the _complete_ project you find the spring boot project containing the data a
     
     Attribute  | Type          | Constraints
     -----------|---------------|--------------------
-    identifier | UUID          | Not null, unique   
+    identifier | UUID          | Not null, unique
     street     | String        | Length=50, Not null
     zipCode    | String        | Length=50, Not null
     city       | String        | Length=50, Not null
@@ -51,7 +51,7 @@ In the _complete_ project you find the spring boot project containing the data a
     
 2. Now it is time to implement the corresponding repository for data access. Create a new interface *PersonRepository*
 that extends *JpaRepository* in new package *com.example.repository*. This way you automatically already get all the
-CRUD (Create/Read/Update/Delete) functionality.  
+CRUD (Create/Read/Update/Delete) functionality.
     
 3. In this step we want to extend this *PersonRepository* with some custom operations:
 
@@ -60,7 +60,7 @@ CRUD (Create/Read/Update/Delete) functionality.
     in [Query Creation](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.query-creation).
     Make sure all addresses are also fetched in this finder (Hint: Look for [Entity Graphs](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.entity-graph)).
 
-    2. Find all persons having given last name (ignoring case). Use same approach as well as for previous one.    
+    2. Find all persons having given last name (ignoring case). Use same approach as well as for previous one.
 
     3. Find unique person by its identifier (UUID). Use same approach again as previous one.
     
@@ -70,7 +70,7 @@ CRUD (Create/Read/Update/Delete) functionality.
 
     5. Delete a person by its identifier (UUID). See [Derived Delete Queries](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.modifying-queries.derived-delete).
 
-    Tip: To test all these operations use the existing class *DataInitializer*.    
+    Tip: To test all these operations use the existing class *DataInitializer*.
     
 4. Complete the service class *PersonService* in package *com.example.service* (this acts as transaction boundary) for managing persons.
 Delegate to methods of *PersonRepository* and do not forget to put `@Transactional` annotations to modifying operations (there is a 
@@ -91,4 +91,4 @@ statements being executed with corresponding transaction boundaries.
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Data JPA Reference Docs](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project

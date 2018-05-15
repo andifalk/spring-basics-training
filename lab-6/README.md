@@ -29,5 +29,5 @@ to the class *SpELApplication* and in the *application.xml*
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 

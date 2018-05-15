@@ -17,10 +17,10 @@ In addition you also find the following:
  
 ## Steps to complete
 
-1. Implement the callback interfaces _InitializingBean_ and _DisposableBean_ for _MyLifecycleBean   
+1. Implement the callback interfaces _InitializingBean_ and _DisposableBean_ for _MyLifecycleBean
 (Put a logger info output into each implemented operation).
 
-2. Implement operations annotated with _@PostConstruct_ and _@PreDestroy_ for _MyLifecycleBean   
+2. Implement operations annotated with _@PostConstruct_ and _@PreDestroy_ for _MyLifecycleBean
 (Put a logger info output into each implemented operation).
 
 3. Start the application using _SpringLifecycleApplication_ to see the sequence of the different lifecycle callbacks. 
@@ -28,5 +28,5 @@ In addition you also find the following:
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
 or the [Spring Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-lifecycle). 
-If you are really have no clue you can always look into the finished reference code in _complete_ sub project
+If you really have no clue you can always look into the finished reference code in _complete_ sub project
 
