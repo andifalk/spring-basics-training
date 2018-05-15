@@ -2,7 +2,7 @@
 In this lab we start with a multi-layered Spring Boot application beginning with the data access layer.
 
 After completing this lab you should know how implement the data access layer using spring data jpa and hibernate
-on an autoconfigured in-memory H2 database.
+on an auto-configured in-memory H2 database.
 
 ## Initial code
 
@@ -23,7 +23,7 @@ In the _complete_ project you find the spring boot project containing the data a
  
 ## Steps to complete
 
-1. Start with implementing the JPA entity classes *Person* and *Address*.
+1. Start with completing the classes *Person* and *Address* to full JPA entities .
 
     **Person** entity:
     
@@ -46,162 +46,47 @@ In the _complete_ project you find the spring boot project containing the data a
     email      | String        | Length=50
     phone      | String        | Length=50
            
-    This information is also limited by default and just shows *up* or *down* status without further details.
-    We will change this behaviour as well in the next step. 
+    Use typical JPA annotations like `@Entity`, `@Column` and bean validations like `@NotNull` or `@Size` to define
+    the entities. 
     
-2. Now it is time to enable more actuator endpoints and also show more details in health endpoint. 
-To do this just add the following entries to the *application.yml*:   
+2. Now it is time to implement the corresponding repository for data access. Create a new interface *PersonRepository*
+that extends *JpaRepository* in new package *com.example.repository*. This way you automatically already get all the
+CRUD (Create/Read/Update/Delete) functionality.  
+    
+3. In this step we want to extend this *PersonRepository* with some custom operations:
 
-    ```
-        management:
-          endpoints:
-            web:
-              exposure:
-                include: '*'
-          endpoint:
-            health:
-              show-details: always
-    ```
+    1. Find a person for given first and last name (with ignoring case). Use 
+    the automatic generation of queries based on naming patterns as described 
+    in [Query Creation](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.query-creation).
+    Make sure all addresses are also fetched in this finder (Hint: Look for [Entity Graphs](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.entity-graph)).
 
-    Now restart the application and this time browse to [localhost:8080/actuator](http://localhost:8080/actuator)
-    
-    Here you should see now a much longer list of actuator endpoints as before. If you want to know what information 
-    is exposed by each actuator endpoint just navigate to each entry in your browser.
-    If you navigate to the health endpoint at [localhost:8080/actuator/health](http://localhost:8080/actuator/health)
-    then you should see more details this time:
-         
-    ```
-      {
-       "status": "UP",
-       "details": {
-         "diskSpace": {
-           "status": "UP",
-           "details": {
-             "total": 950636347392,
-             "free": 439610875904,
-             "threshold": 10485760
-           }
-         }
-      }
-    ```
-    
-    ***Note***: In production you must secure most of the actuator endpoints as these provide sensitive information
-    that can be used by hackers in trying to attack your application! We will add security in the spring security lab section.
-    
-3. Now we will add our own custom health endpoint indicator. 
-Create a new class called *MyHealthEndpoint* in package *com.example*. Put the following code into this class:
+    2. Find all persons having given last name (ignoring case). Use same approach as well as for previous one.    
 
-    ```
-        @Component
-        public class MyHealthEndpoint implements HealthIndicator {
-            
-            private static final Logger LOGGER 
-                = LoggerFactory.getLogger(MyHealthEndpoint.class);
-        
-            @Override
-            public Health health() {
-                LOGGER.trace("Custom health endpoint called");
-                return Health.up().withDetail("mykey", "value").build();
-            }
-        }
-    ```
+    3. Find unique person by its identifier (UUID). Use same approach again as previous one.
     
-    This custom health endpoint always returns the status *UP* with some sample details.
-    A logger is added here as well. Spring boot provides auto configuration for the *SLF4J* logger.
-    
-    If you now restart the application and browse to [localhost:8080/actuator/health](http://localhost:8080/actuator/health) 
-    again then you should see additional details:
-    
-    ```
-    {
-      "status": "UP",
-      "details": {
-        "myHealthEndpoint": {
-          "status": "UP",
-          "details": {
-            "mykey": "value"
-          }
-        },
-        "diskSpace": {
-          "status": "UP",
-          "details": {
-            "total": 950636347392,
-            "free": 439610875904,
-            "threshold": 10485760
-          }
-        }
-      }
-    }
-    ```
-    
-    You cannot see any corresponding *TRACE* log output for the logger we put in in this step as
-    the default logging level is *INFO*. We will change this in the last step of this lab.
-    
-4. In this step we will add a custom actuator endpoint exposed to the web. To achieve this 
-create a new class *MyCustomEndpoint* in package *com.example* with the following contents:
+    4. Find all persons living at an address with a given city. Use `@Query` approach here (with join and fetch join to load
+    addresses as well). See [Using @Query](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.at-query)
+    for reference.
 
-    ```    
-        @Component
-        @WebEndpoint(id = "custom")
-        public class MyCustomEndpoint {
-        
-            @ReadOperation
-            public MyStatus myValue() {
-                return new MyStatus(200, "ok");
-            }
-        
-            class MyStatus {
-                private int status;
-                private String detail;
-        
-                public MyStatus() {
-                }
-        
-                public MyStatus(int status, String detail) {
-                    this.status = status;
-                    this.detail = detail;
-                }
-        
-                public int getStatus() {
-                    return status;
-                }
-        
-                public String getDetail() {
-                    return detail;
-                }
-            }
-        }
-    ```
+    5. Delete a person by its identifier (UUID). See [Derived Delete Queries](https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.modifying-queries.derived-delete).
 
-    If you restart the application again and browse to the actuator list at 
-    [localhost:8080/actuator/actuator](http://localhost:8080/actuator/actuator) then you should 
-    see a new endpoint at [localhost:8080/actuator/custom](http://localhost:8080/actuator/custom).
-    If you browse to this location then you should see the following contents:
+    Tip: To test all these operations use the existing class *DataInitializer*.    
     
-    ```
-        {
-          "status": 200,
-          "detail": "ok"
-        }
-    ```
+4. Complete the service class *PersonService* in package *com.example.service* (this acts as transaction boundary) for managing persons.
+Delegate to methods of *PersonRepository* and do not forget to put `@Transactional` annotations to modifying operations (there is a 
+class-level 'readonly' transaction already defined). Please be aware of implementing lazy loading operations leading either to 
+typical N+1 sql problems or even to lazy loading errors (when executed outside the transaction boundary). 
      
-5. In this last step we change the default logging configuration in *application.yml* 
-to following settings:
+5. When running the application please have a closer look into the console log output. Here you see all the sql 
+statements being executed with corresponding transaction boundaries.
 
-    * Change log level to *DEBUG* for package *org.springframework*
-    * Change log level to *TRACE* for package *com.example*
-    
-    ```
-        logging:
-          level:
-            com:
-              example: trace
-            org:
-              springframework: debug
-    ```         
+6. You may also look into the in-memory database using the h2 console. To perform this just browse to 
+[localhost:8080/h2-console](http://localhost:8080/h2-console). Make sure that the following settings are in the login dialog:
 
-    After making these changes and restarting the application the logging output we put in during this lab
-    is appearing in the console. 
+    * Driver Class: org.h2.Driver
+    * JDBC-URL: jdbc:h2:mem:testdb
+    * User Name: sa
+    * Password: 
          
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
