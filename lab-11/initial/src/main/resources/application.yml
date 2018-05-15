@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa:
+            JpaTransactionManager: trace

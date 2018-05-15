@@ -32,7 +32,7 @@ __Table of Contents:__
     3. [DevOps: Logging and Monitoring (Actuator)](https://github.com/andifalk/spring-basics-training/tree/master/lab-9)
 3.  Spring Data Labs
     1. [Spring Data JPA](https://github.com/andifalk/spring-basics-training/tree/master/lab-10)
-    2. Flyway Database Migrations
+    2. [Flyway Database Migrations](https://github.com/andifalk/spring-basics-training/tree/master/lab-11)
 4.  Spring MVC Labs
     1. RESTful Services
     2. Web Frontends with Thymeleaf
