@@ -34,8 +34,7 @@ __Table of Contents:__
     1. [Spring Data JPA](https://github.com/andifalk/spring-basics-training/tree/master/lab-10)
     2. [Flyway Database Migrations](https://github.com/andifalk/spring-basics-training/tree/master/lab-11)
 4.  Spring MVC Labs
-    1. RESTful Services
-    2. Web Frontends with Thymeleaf
+    1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
 5.  Spring Security Labs
     1. Authentication
     2. Authorization
