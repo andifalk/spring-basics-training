@@ -36,6 +36,5 @@ There you also find already the corresponding resource classes for person and ad
              
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
-or the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup)
-or the [Flyway DB Docs](https://flywaydb.org/documentation/). 
+or the [Spring MVC Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-controller). 
 If you really have no clue you can always look into the finished reference code in _complete_ sub project
