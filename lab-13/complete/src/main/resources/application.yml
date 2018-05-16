@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa:
+            JpaTransactionManager: trace
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -36,8 +36,7 @@ __Table of Contents:__
 4.  Spring MVC Labs
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
 5.  Spring Security Labs
-    1. Authentication
-    2. Authorization
+    1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
 6.  Testing Labs
     1. Unit Tests
     2. Integration Test Slices
