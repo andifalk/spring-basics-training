@@ -33,8 +33,20 @@ the data access layer with following classes/files:
 
 1. In this step we complete the already existing *PersonRestController* in package *com.example.api*.
 There you also find already the corresponding resource classes for person and addresses.
-             
+All operations of the rest interface should call only the *PersonService* operations.
+Please add the following requests:
+
+    * GET request for list of all persons (use a *@GetMapping*): `/persons`
+    * GET request for one person (use a *@GetMapping*): `/persons/{personId}`
+    * GET request for the addresses of a person (use a *GetMapping*): `/persons/{personId}/addresses`
+    * POST request to create a person (use a *PostMapping*): `/persons`
+    * POST request to add an address to a person (use a *PostMapping*): `/persons/{personId}`
+    * DELETE request to delete a person with its addresses (use a *DeleteMapping*): `/persons/{personId}`
+
+You also have to specify the correct consumer and/or producer (the media types, in our case JSON/UTF-8) for each request.
+
 ***Tip:***
 If you need any help then consult the [presentation](https://andifalk.github.io/spring-basics-training/presentation/index.html) 
-or the [Spring MVC Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-controller). 
+or the [Spring MVC Reference Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-controller)
+and the [Spring Boot Reference Docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-spring-mvc). 
 If you really have no clue you can always look into the finished reference code in _complete_ sub project
