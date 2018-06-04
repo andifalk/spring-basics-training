@@ -30,16 +30,21 @@ __Table of Contents:__
     1. [Create a new App using 'start.spring.io'](https://github.com/andifalk/spring-basics-training/tree/master/lab-7)
     2. [Externalized Configuration (Property and YAML)](https://github.com/andifalk/spring-basics-training/tree/master/lab-8)
     3. [DevOps: Logging and Monitoring (Actuator)](https://github.com/andifalk/spring-basics-training/tree/master/lab-9)
-3.  Spring Data Labs
+3. Spring Data Labs
     1. [Spring Data JPA](https://github.com/andifalk/spring-basics-training/tree/master/lab-10)
     2. [Flyway Database Migrations](https://github.com/andifalk/spring-basics-training/tree/master/lab-11)
-4.  Spring MVC Labs
+4. Spring MVC Labs
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
-5.  Spring Security Labs
+5. Spring Security Labs
     1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
-6.  Testing Labs
+6. Testing Labs
     1. Unit Tests
     2. Integration Test Slices
+7. Reactive Spring
+    1. Reactive Streams with Project Reactor
+    2. Reactive Persistence (MongoDB)
+    3. WebFlux: Annotated Controller
+    4. WebFlux: Router/Handler      
 
 ## License
 
