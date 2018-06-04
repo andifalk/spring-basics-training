@@ -7,17 +7,45 @@ Spring basics training is a one-day or two-day Spring Framework and Spring Boot 
 
 ## Labs (Hands-On)
 
-__System Requirements__
+### System Requirements
 
 * A Java SDK (version 8 or higher)
 * Gradle build system
 * Any Java IDE (Eclipse, IntelliJ, VS Code, NetBeans)
 
+### Setup
+
 All labs contain _initial_ and _complete_ directories.
 In _init_ directory you find all required source code to start and complete the lab. In _complete_ directory 
 you find the complete solution of the lab.
 
-__Table of Contents:__
+As we are building the samples using [Gradle](https://gradle.org) your Java IDE should be capable use this.
+
+As IntelliJ user support for Gradle is included by default.
+As an Eclipse user you have to install a plugin via the marketplace
+
+![eclipse](eclipse_gradle.png "eclipse")
+
+To get the workshop project you either can just clone the repository using
+
+```
+https://github.com/andifalk/spring-basics-training.git
+```
+
+or
+
+```
+ git@github.com:andifalk/spring-basics-training.git
+```
+
+or simply download it as a [zip archive](https://github.com/andifalk/spring-basics-training/archive/master.zip).
+
+After that you can import the workshop project into your IDE
+
+* IntelliJ: "New project from existing sources..."
+* Eclipse: "Import/Gradle/Existing gradle project"
+
+###Table of Contents
 
 1. Core Spring Labs
     1. [Beans and Application Context (XML)](https://github.com/andifalk/spring-basics-training/tree/master/lab-1)
