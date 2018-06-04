@@ -45,7 +45,7 @@ After that you can import the workshop project into your IDE
 * IntelliJ: "New project from existing sources..."
 * Eclipse: "Import/Gradle/Existing gradle project"
 
-###Table of Contents
+### Table of Contents
 
 1. Core Spring Labs
     1. [Beans and Application Context (XML)](https://github.com/andifalk/spring-basics-training/tree/master/lab-1)
