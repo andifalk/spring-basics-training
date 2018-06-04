@@ -1,4 +1,4 @@
 rootProject.name = 'lab-2'
-include 'complete'
-include 'initial'
+include 'lab2-complete'
+include 'lab2-initial'
 
