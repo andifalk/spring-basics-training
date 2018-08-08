@@ -25,7 +25,7 @@ Please note: When you have generated your application following the steps below 
     
     * Gradle Project
     * Java
-    * Spring Boot `2.0.2` or newer
+    * Spring Boot `2.0.4` or newer
     * Group = `com.example`
     * Artifact = `initial`
     * Dependencies = `Web`, `DevTools`, `Configuration Processor` and `Actuator`

@@ -5,10 +5,12 @@
 
     <bean id="addressbook" class="com.example.beans.AddressBook">
         <constructor-arg ref="addresslist"/>
+        <property name="address1" ref="myperson"/>
+        <property name="address2" ref="myperson"/>
     </bean>
 
     <util:list id="addresslist">
-        <bean class="com.example.beans.Person" scope="prototype">
+        <bean class="com.example.beans.Person">
             <property name="firstName" value="Hans"/>
             <property name="lastName" value="Mustermann"/>
             <property name="street" value="Hauptstr.10"/>
@@ -16,7 +18,7 @@
             <property name="city" value="Stuttgart"/>
             <property name="country" value="GERMANY"/>
         </bean>
-        <bean class="com.example.beans.Person" scope="prototype">
+        <bean class="com.example.beans.Person">
             <property name="firstName" value="Peter"/>
             <property name="lastName" value="Maier"/>
             <property name="street" value="Nebenstr.2"/>
@@ -24,7 +26,7 @@
             <property name="city" value="Wien"/>
             <property name="country" value="AUSTRIA"/>
         </bean>
-        <bean class="com.example.beans.Person" scope="prototype">
+        <bean class="com.example.beans.Person">
             <property name="firstName" value="Susanne"/>
             <property name="lastName" value="Bauer"/>
             <property name="street" value="Parkallee 233"/>
@@ -33,5 +35,14 @@
             <property name="country" value="SWITZERLAND"/>
         </bean>
     </util:list>
+
+    <bean class="com.example.beans.Person" id="myperson" scope="prototype">
+        <property name="firstName" value="Sabine"/>
+        <property name="lastName" value="Müller"/>
+        <property name="street" value="Hauptstr. 25"/>
+        <property name="zipCode" value="88888"/>
+        <property name="city" value="München"/>
+        <property name="country" value="GERMANY"/>
+    </bean>
 
 </beans>

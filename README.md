@@ -1,5 +1,9 @@
 # Spring Basics Training
-Spring basics training is a one-day or two-day Spring Framework and Spring Boot training. In this course, students build a Spring Java application including the Spring Core Framework and related modules like Spring Boot, Spring MVC, Spring Data, Spring Security and Spring Testing with lots of hands-on labs.
+Spring basics training is a basic Spring Framework and Spring Boot training. 
+In this course, students build a Spring Java application including the Spring Core Framework and related modules like Spring Boot, Spring MVC, Spring Data, Spring Security and Spring Testing with lots of hands-on labs.
+
+Depending on the intensity of diving into the spring world this training is targeted
+as a 1-day or 2-days training workshop.
 
 ## Presentation
 
@@ -65,10 +69,10 @@ After that you can import the workshop project into your IDE
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
 5. Spring Security Labs
     1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
-6. Testing Labs
+6. Testing Labs (*Upcoming*)
     1. Unit Tests
     2. Integration Test Slices
-7. Reactive Spring
+7. Reactive Spring (*Upcoming*)
     1. Reactive Streams with Project Reactor
     2. Reactive Persistence (MongoDB)
     3. WebFlux: Annotated Controller

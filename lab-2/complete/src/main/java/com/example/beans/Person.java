@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+import static org.springframework.beans.factory.config.BeanDefinition.*;
 
 @Component
 @Scope(SCOPE_PROTOTYPE)
@@ -72,7 +72,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.DEFAULT_STYLE)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
                 .append("street", street)

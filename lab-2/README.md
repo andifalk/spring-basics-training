@@ -24,7 +24,7 @@ In addition you also find the following:
 1. Change beans for _AddressBook_ and _Person_ so that these are detected by component scanning
 (Please note that multiple instances of a _Person_ are required, you can use the _@Scope_ annotation here).
 
-2. Configure the _ComponentScanConfiguration_ to enable component scannning (use _@ComponentScan_ annotation).
+2. Configure the _ComponentScanConfiguration_ to enable component scanning (use _@ComponentScan_ annotation).
 and create a java bean for the address list using the @Bean annotation.
 
 3. Create an annotation based classpath spring context in main method of existing class _ComponentScanApplication_. Then

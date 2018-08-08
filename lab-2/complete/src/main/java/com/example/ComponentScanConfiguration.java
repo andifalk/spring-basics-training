@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.beans.Person;
 import com.example.beans.Country;
+import com.example.beans.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -42,4 +42,5 @@ public class ComponentScanConfiguration {
 
         return personList;
     }
+
 }

@@ -22,10 +22,11 @@ In addition you also find the following:
 ## Steps to complete
 
 1. Configure beans for _AddressBook_ and _Person_ in already existing _application.xml_ file 
-(Please note that multiple instances of a _Person_ are required).
+(Play with scopes _singleton_ and _prototype_ for properties _address1_ and _address2_
+of _AddressBook_).
 
 2. Create a xml based classpath spring context in main method of existing class _XmlFileApplication_. Then
-get an instance of _AddressBook_ from the instanciated context and print it to system out. 
+get an instance of _AddressBook_ from the instantiated context and print it to system out. 
 
 
 ***Tip:***
