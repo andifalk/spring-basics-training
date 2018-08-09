@@ -69,9 +69,9 @@ After that you can import the workshop project into your IDE
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
 5. Spring Security Labs
     1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
-6. Testing Labs (*Upcoming*)
-    1. Unit Tests
-    2. Integration Test Slices
+6. Testing Labs
+    1. [Unit and Integration Tests (Test slices)](https://github.com/andifalk/spring-basics-training/tree/master/lab-14)
+    2. Security Tests (*Upcoming*)
 7. Reactive Spring (*Upcoming*)
     1. Reactive Streams with Project Reactor
     2. Reactive Persistence (MongoDB)

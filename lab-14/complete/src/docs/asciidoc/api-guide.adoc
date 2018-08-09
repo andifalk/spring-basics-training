@@ -1,0 +1,250 @@
+= Person API Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:numbered: ''
+:docinfo: shared
+
+
+[[overview]]
+== Overview
+
+The Person API is provided as a RESTFul service.
+The API uses level 3 (hypermedia controls) of the
+http://martinfowler.com/articles/richardsonMaturityModel.html[Richardson Maturity Model].
+
+All body payloads (requests and responses) are in JSON format.
+
+[[overview-http-verbs]]
+=== HTTP verbs
+
+The Person REST API tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource or trigger one time actions
+
+| `PUT`
+| Used to update an existing resource, excluding partial updates
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+=== HTTP status codes
+
+The Person REST API tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `401 Unauthorized`
+| The request requires authentication.
+
+| `403 Forbidden`
+| The request requires an authorized role/permission.
+
+| `404 Not Found`
+| The requested resource did not exist
+
+| `405 Method Not Allowed`
+| API called with invalid HTTP verb (e.g. 'GET' instead of 'PUT')
+
+| `409 Conflict`
+| Update of resource not possible as resource was already updated or deleted by another transaction.
+
+| `412 Precondition Failed`
+| Resource can not be updated because the provided version is outdated.
+
+| `500 Internal Server Error`
+| Server reported an internal error during processing of API call. For security reasons no further details are
+provided here
+|===
+
+[[overview-hypermedia]]
+=== Hypermedia
+
+The Person REST API uses hypermedia and resources include links to other resources in their
+responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application
+from resource to resource.
+Language (HAL)] format. Links can be found beneath the `_links` key. Users of the API should
+not create URIs themselves, instead they should use the above-described links to navigate
+
+All provided primary and sub resources of Person REST API are described in the following sections.
+
+[[resources]]
+== Resources
+
+=== Persons
+
+[[resources-create-person]]
+==== Create Person
+
+Create a new person.
+
+[[resources-create-person]]
+===== Request
+
+A `POST` request is used to create a new person.
+
+operation::create-person[snippets='http-request,curl-request']
+
+===== Request fields
+
+include::{snippets}/create-person/request-fields.adoc[]
+
+===== Example response
+
+include::{snippets}/create-person/http-response.adoc[]
+
+===== Response fields
+
+include::{snippets}/create-person/response-fields.adoc[]
+
+[[resources-create-person-links]]
+===== Links
+
+include::{snippets}/create-person/links.adoc[]
+
+[[resources-get-persons]]
+==== Get all Persons
+
+Gets all persons.
+
+[[resources-get-persons]]
+===== Request
+
+A `GET` request is used to get all persons.
+
+operation::get-persons[snippets='http-request,curl-request']
+
+===== Request fields
+
+include::{snippets}/get-persons/request-fields.adoc[]
+
+===== Example response
+
+include::{snippets}/get-persons/http-response.adoc[]
+
+===== Response fields
+
+include::{snippets}/get-persons/response-fields.adoc[]
+
+[[resources-get-persons-links]]
+===== Links
+
+include::{snippets}/get-persons/links.adoc[]
+
+[[resources-get-person]]
+==== Get a Person
+
+Gets a person.
+
+[[resources-get-person]]
+===== Request
+
+A `GET` request is used to get a person.
+
+operation::get-person[snippets='http-request,curl-request']
+
+===== Request fields
+
+include::{snippets}/get-person/request-fields.adoc[]
+
+===== Example response
+
+include::{snippets}/get-person/http-response.adoc[]
+
+===== Response fields
+
+include::{snippets}/get-person/response-fields.adoc[]
+
+[[resources-get-person-links]]
+===== Links
+
+include::{snippets}/get-person/links.adoc[]
+
+[[resources-get-addresses]]
+==== Get all addresses of a Person
+
+Gets all addresses of a person.
+
+[[resources-get-addresses]]
+===== Request
+
+A `GET` request is used to get addresses.
+
+operation::get-addresses[snippets='http-request,curl-request']
+
+===== Request fields
+
+include::{snippets}/get-addresses/request-fields.adoc[]
+
+===== Example response
+
+include::{snippets}/get-addresses/http-response.adoc[]
+
+===== Response fields
+
+include::{snippets}/get-addresses/response-fields.adoc[]
+
+[[resources-get-addresses-links]]
+===== Links
+
+include::{snippets}/get-addresses/links.adoc[]
+
+[[resources-delete-person]]
+==== Delete a Person
+
+Deletes a person.
+
+[[resources-delete-person]]
+===== Request
+
+A `DELETE` request is used to delete a person.
+
+operation::delete-person[snippets='http-request,curl-request']
+
+===== Request fields
+
+include::{snippets}/delete-person/request-fields.adoc[]
+
+===== Example response
+
+include::{snippets}/delete-person/http-response.adoc[]
+
+===== Response fields
+
+include::{snippets}/delete-person/response-fields.adoc[]
+
+[[resources-delete-person-links]]
+===== Links
+
+include::{snippets}/delete-person/links.adoc[]
