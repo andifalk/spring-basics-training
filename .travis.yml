@@ -1,0 +1,25 @@
+language: java
+dist: trusty
+install: skip
+sudo: required
+services:
+  - docker
+
+jobs:
+  include:
+
+    - stage: build
+      jdk: openjdk8
+      env: SPRING_TRAINING
+      script:
+        - ./gradlew build
+    - stage: build
+      jdk: oraclejdk9
+      env: SPRING_TRAINING
+      script:
+        - ./gradlew build
+    - stage: build
+      jdk: oraclejdk10
+      env: SPRING_TRAINING
+      script:
+        - ./gradlew build
