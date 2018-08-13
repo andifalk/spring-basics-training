@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andifalk/spring-basics-training.svg?branch=master)](https://travis-ci.org/andifalk/spring-basics-training)
+
 # Spring Basics Training
 Spring basics training is a basic Spring Framework and Spring Boot training. 
 In this course, students build a Spring Java application including the Spring Core Framework and related modules like Spring Boot, Spring MVC, Spring Data, Spring Security and Spring Testing with lots of hands-on labs.
