@@ -11,17 +11,17 @@ import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    @EntityGraph(attributePaths = "addresses")
-    Person findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName);
+  @EntityGraph(attributePaths = "addresses")
+  Person findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName);
 
-    List<Person> findAllByLastNameIgnoreCase(String lastName);
+  List<Person> findAllByLastNameIgnoreCase(String lastName);
 
-    @EntityGraph(attributePaths = "addresses")
-    Person findOneByIdentifier(UUID identifier);
+  @EntityGraph(attributePaths = "addresses")
+  Person findOneByIdentifier(UUID identifier);
 
-    @Query("SELECT DISTINCT p FROM Person p LEFT JOIN p.addresses adr JOIN FETCH p.addresses WHERE adr.city = :city")
-    List<Person> findAllLivingInCity(@Param("city") String city);
+  @Query(
+      "SELECT DISTINCT p FROM Person p LEFT JOIN p.addresses adr JOIN FETCH p.addresses WHERE adr.city = :city")
+  List<Person> findAllLivingInCity(@Param("city") String city);
 
-    void deleteByIdentifier(UUID identifier);
-
+  void deleteByIdentifier(UUID identifier);
 }
