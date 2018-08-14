@@ -29,6 +29,7 @@ repositories {
 
 spotbugs {
     toolVersion = '3.1.6'
+    excludeFilter = file("$rootProject.projectDir/excludefilter.xml")
 }
 
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
