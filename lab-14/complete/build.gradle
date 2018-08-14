@@ -50,6 +50,8 @@ dependencies {
 
     asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
+    testCompile('javax.xml.bind:jaxb-api:2.2.11')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
     testCompile('org.springframework.restdocs:spring-restdocs-core')

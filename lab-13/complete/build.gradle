@@ -50,6 +50,7 @@ dependencies {
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('com.h2database:h2')
     spotbugsPlugins('com.h3xstream.findsecbugs:findsecbugs-plugin:1.8.0')
+    testCompile('javax.xml.bind:jaxb-api:2.2.11')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 }
