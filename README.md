@@ -1,3 +1,4 @@
+[![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
 [![Build Status](https://travis-ci.org/andifalk/spring-basics-training.svg?branch=master)](https://travis-ci.org/andifalk/spring-basics-training)
 
 
@@ -86,3 +87,5 @@ After that you can import the workshop project into your IDE
 Apache 2.0 licensed
 
 Copyright (c) by 2018 Andreas Falk
+
+[1]:http://www.apache.org/licenses/LICENSE-2.0.txt
