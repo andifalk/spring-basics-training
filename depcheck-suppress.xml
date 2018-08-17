@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+    <suppress>
+        <notes><![CDATA[
+   file name: jruby-complete-1.7.26.jar: jopenssl.jar
+   ]]></notes>
+        <gav regex="true">^rubygems:jruby-openssl:.*$</gav>
+        <cve>CVE-2009-3245</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: jruby-complete-1.7.26.jar: jopenssl.jar
+   ]]></notes>
+        <gav regex="true">^rubygems:jruby-openssl:.*$</gav>
+        <cve>CVE-2016-2108</cve>
+    </suppress>
+</suppressions>

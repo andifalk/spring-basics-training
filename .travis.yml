@@ -10,16 +10,13 @@ jobs:
 
     - stage: build
       jdk: openjdk8
-      env: SPRING_TRAINING
       script:
-        - ./gradlew build
+        - ./gradlew build dependencyCheckAnalyze
     - stage: build
       jdk: oraclejdk9
-      env: SPRING_TRAINING
       script:
-        - ./gradlew build
+        - ./gradlew build dependencyCheckAnalyze
     - stage: build
       jdk: oraclejdk10
-      env: SPRING_TRAINING
       script:
-        - ./gradlew build
+        - ./gradlew build dependencyCheckAnalyze

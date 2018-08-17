@@ -1,0 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:3.3.0'
+    }
+}
+
+subprojects {
+    apply plugin: 'org.owasp.dependencycheck'
+
+    dependencyCheck {
+        suppressionFile = file("$rootProject.projectDir/depcheck-suppress.xml")
+        failBuildOnCVSS = 9
+    }
+}
