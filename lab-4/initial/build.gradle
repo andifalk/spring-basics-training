@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springVersion = '5.0.8.RELEASE'
+        springVersion = '5.1.4.RELEASE'
     }
 }
 
@@ -24,8 +24,8 @@ dependencies {
     compile ("org.springframework:spring-beans:${springVersion}")
     compile ("org.springframework:spring-aop:${springVersion}")
     compile ("org.springframework:spring-expression:${springVersion}")
-    compile ('org.apache.commons:commons-lang3:3.7')
+    compile ('org.apache.commons:commons-lang3:3.8.1')
     compile ('ch.qos.logback:logback-classic:1.2.3')
-    compile ('org.aspectj:aspectjweaver:1.9.1')
+    compile ('org.aspectj:aspectjweaver:1.9.2')
     testCompile ('junit:junit:4.12')
 }

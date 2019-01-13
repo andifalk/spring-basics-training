@@ -1,0 +1,750 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "lab-13-complete",
+                "projectName": "lab-13-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9-complete",
+                "projectName": "lab-9-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-13-initial",
+                "projectName": "lab-13-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2",
+                "projectName": "lab-2",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6",
+                "projectName": "lab-6",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1-complete",
+                "projectName": "lab-1-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-13",
+                "projectName": "lab-13",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4-initial",
+                "projectName": "lab-4-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12-initial",
+                "projectName": "lab-12-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6-complete",
+                "projectName": "lab-6-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10-complete",
+                "projectName": "lab-10-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2-complete",
+                "projectName": "lab-2-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11-complete",
+                "projectName": "lab-11-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1",
+                "projectName": "lab-1",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5",
+                "projectName": "lab-5",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9",
+                "projectName": "lab-9",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11-initial",
+                "projectName": "lab-11-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12",
+                "projectName": "lab-12",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3-complete",
+                "projectName": "lab-3-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14-initial",
+                "projectName": "lab-14-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2-initial",
+                "projectName": "lab-2-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12-complete",
+                "projectName": "lab-12-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4-complete",
+                "projectName": "lab-4-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5-initial",
+                "projectName": "lab-5-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1-initial",
+                "projectName": "lab-1-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8-initial",
+                "projectName": "lab-8-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4",
+                "projectName": "lab-4",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8",
+                "projectName": "lab-8",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5-complete",
+                "projectName": "lab-5-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11",
+                "projectName": "lab-11",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14-complete",
+                "projectName": "lab-14-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3-initial",
+                "projectName": "lab-3-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6-initial",
+                "projectName": "lab-6-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-7-complete",
+                "projectName": "lab-7-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-7/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3",
+                "projectName": "lab-3",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-7",
+                "projectName": "lab-7",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-7",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10",
+                "projectName": "lab-10",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14",
+                "projectName": "lab-14",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8-complete",
+                "projectName": "lab-8-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9-initial",
+                "projectName": "lab-9-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10-initial",
+                "projectName": "lab-10-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "lab-13-complete",
+                "projectName": "lab-13-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9-complete",
+                "projectName": "lab-9-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-13-initial",
+                "projectName": "lab-13-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2",
+                "projectName": "lab-2",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6",
+                "projectName": "lab-6",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1-complete",
+                "projectName": "lab-1-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-13",
+                "projectName": "lab-13",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-13",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4-initial",
+                "projectName": "lab-4-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12-initial",
+                "projectName": "lab-12-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6-complete",
+                "projectName": "lab-6-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10-complete",
+                "projectName": "lab-10-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2-complete",
+                "projectName": "lab-2-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11-complete",
+                "projectName": "lab-11-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1",
+                "projectName": "lab-1",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5",
+                "projectName": "lab-5",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9",
+                "projectName": "lab-9",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11-initial",
+                "projectName": "lab-11-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12",
+                "projectName": "lab-12",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3-complete",
+                "projectName": "lab-3-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14-initial",
+                "projectName": "lab-14-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-2-initial",
+                "projectName": "lab-2-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-2/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-12-complete",
+                "projectName": "lab-12-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-12/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4-complete",
+                "projectName": "lab-4-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5-initial",
+                "projectName": "lab-5-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-1-initial",
+                "projectName": "lab-1-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-1/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8-initial",
+                "projectName": "lab-8-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-4",
+                "projectName": "lab-4",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-4",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8",
+                "projectName": "lab-8",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-5-complete",
+                "projectName": "lab-5-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-5/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-11",
+                "projectName": "lab-11",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-11",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14-complete",
+                "projectName": "lab-14-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3-initial",
+                "projectName": "lab-3-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-6-initial",
+                "projectName": "lab-6-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-6/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-7-complete",
+                "projectName": "lab-7-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-7/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-3",
+                "projectName": "lab-3",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-3",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-7",
+                "projectName": "lab-7",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-7",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10",
+                "projectName": "lab-10",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-14",
+                "projectName": "lab-14",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-14",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-8-complete",
+                "projectName": "lab-8-complete",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-8/complete",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-9-initial",
+                "projectName": "lab-9-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-9/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            },
+            {
+                "name": "lab-10-initial",
+                "projectName": "lab-10-initial",
+                "workingDirectory": "/home/afa/development/localgit/spring-basics-training/lab-10/initial",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
