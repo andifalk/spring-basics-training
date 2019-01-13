@@ -6,6 +6,8 @@
 Spring basics training is a basic Spring Framework and Spring Boot training. 
 In this course, students build a Spring Java application including the Spring Core Framework and related modules like Spring Boot, Spring MVC, Spring Data, Spring Security and Spring Testing with lots of hands-on labs.
 
+All training modules are based on current __Spring version 5.1.x__ and __Spring Boot 2.1.x.__
+
 Depending on the intensity of diving into the spring world this training is targeted
 as a 1-day or 2-days training workshop.
 
@@ -17,8 +19,8 @@ as a 1-day or 2-days training workshop.
 
 ### System Requirements
 
-* A Java SDK (version 8 or higher)
-* Gradle build system
+* A Java SDK (at least version 8, tested with JDK versions 8, 9 and 11)
+* Gradle build system (version 4.9 or more recent)
 * Any Java IDE (Eclipse, IntelliJ, VS Code, NetBeans)
 
 ### Setup
@@ -29,8 +31,9 @@ you find the complete solution of the lab.
 
 As we are building the samples using [Gradle](https://gradle.org) your Java IDE should be capable use this.
 
-As IntelliJ user support for Gradle is included by default.
-As an Eclipse user you have to install a plugin via the marketplace
+* As IntelliJ user support for Gradle is included by default.
+* As a Visual Studio Code user you have to install the following extensions: _java extension pack_, _spring boot extension pack_ and _gradle language support_.
+* As an Eclipse user you have to install a plugin via the marketplace
 
 ![eclipse](eclipse_gradle.png "eclipse")
 
@@ -52,6 +55,7 @@ After that you can import the workshop project into your IDE
 
 * IntelliJ: "New project from existing sources..."
 * Eclipse: "Import/Gradle/Existing gradle project"
+* Visual Studio Code: Just open the root directory
 
 ### Table of Contents
 
