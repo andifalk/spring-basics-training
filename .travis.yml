@@ -17,6 +17,6 @@ jobs:
       script:
         - ./gradlew build dependencyCheckAnalyze
     - stage: build
-      jdk: oraclejdk10
+      jdk: openjdk11
       script:
         - ./gradlew build dependencyCheckAnalyze
