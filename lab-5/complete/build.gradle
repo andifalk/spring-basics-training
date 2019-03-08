@@ -1,12 +1,10 @@
 buildscript {
     ext {
-        springVersion = '5.1.4.RELEASE'
+        springVersion = '5.1.5.RELEASE'
     }
 }
 
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
 
 group 'com.example'
 version '1.0-SNAPSHOT'
