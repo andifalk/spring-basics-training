@@ -77,13 +77,11 @@ After that you can import the workshop project into your IDE
     1. [RESTful Services with HATEOAS](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
 5. Spring Security Labs
     1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-14)
+    2. Actuator Security (*Upcoming*)
 6. Testing Labs
     1. [Unit and Integration Tests (Test slices)](https://github.com/andifalk/spring-basics-training/tree/master/lab-15)
     2. Security Tests (*Upcoming*)
-7. Production Ready    
-    1. Actuators (*Upcoming*)
-    2. Actuator Security (*Upcoming*)
-8. Deploy Spring Boot Applications
+7. Deploy Spring Boot Applications
     1. CloudFoundry (*Upcoming*)
     2. Kubernetes (*Upcoming*)
 
