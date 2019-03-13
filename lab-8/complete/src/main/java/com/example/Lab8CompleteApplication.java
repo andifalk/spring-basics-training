@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(MyConfigurationProperties.class)
-public class CompleteApplication {
+public class Lab8CompleteApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(CompleteApplication.class, args);
+    SpringApplication.run(Lab8CompleteApplication.class, args);
   }
 
 }

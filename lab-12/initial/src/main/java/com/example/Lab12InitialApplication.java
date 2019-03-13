@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class CompleteApplication {
+public class Lab12InitialApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(CompleteApplication.class, args);
+    SpringApplication.run(Lab12InitialApplication.class, args);
   }
 
   @Bean

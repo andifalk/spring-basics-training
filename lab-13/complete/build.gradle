@@ -8,13 +8,9 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
-    configurations.classpath {
-        exclude group: 'com.google.guava', module: 'guava'
-    }
 }
 
 plugins {
-    id "com.github.spotbugs" version "1.6.9"
     id 'com.adarshr.test-logger' version '1.6.0'
 }
 
@@ -31,18 +27,6 @@ repositories {
     mavenCentral()
 }
 
-spotbugs {
-    toolVersion = '3.1.8'
-    excludeFilter = file("$rootProject.projectDir/excludefilter.xml")
-}
-
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -53,7 +37,6 @@ dependencies {
     compile('org.modelmapper:modelmapper:2.3.2')
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('com.h2database:h2')
-    spotbugsPlugins('com.h3xstream.findsecbugs:findsecbugs-plugin:1.8.0')
     testCompile('javax.xml.bind:jaxb-api:2.2.11')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')

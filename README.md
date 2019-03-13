@@ -8,7 +8,7 @@ In this course, students build a Spring Java application including the Spring Co
 
 All training modules are based on current __Spring version 5.1.x__ and __Spring Boot 2.1.x.__
 
-Depending on the intensity of diving into the spring world this training is targeted
+Depending on the intensity in diving into hands-on labs of the spring world this training is targeted
 as a 1-day or 2-days training workshop.
 
 ## Presentation
@@ -20,8 +20,7 @@ as a 1-day or 2-days training workshop.
 ### System Requirements
 
 * A Java SDK (at least version 8, tested with JDK versions 8, 9 and 11)
-* Gradle build system (version 4.9 or more recent)
-* Any Java IDE (Eclipse, IntelliJ, VS Code, NetBeans)
+* Any Java IDE (Eclipse, IntelliJ, VS Code, NetBeans, ...)
 
 ### Setup
 
