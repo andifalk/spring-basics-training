@@ -1,15 +1,12 @@
 buildscript {
     ext {
         springBootVersion = '2.1.3.RELEASE'
-        snippetsDir = file('build/generated-snippets')
     }
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath('org.asciidoctor:asciidoctor-gradle-plugin:1.5.7')
     }
 }
 
@@ -21,7 +18,6 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.asciidoctor.convert'
 
 group = 'com.example'
 version = '1.0-SNAPSHOT'
@@ -31,39 +27,17 @@ repositories {
     mavenCentral()
 }
 
-asciidoctor {
-    attributes 'snippets': snippetsDir
-    inputs.dir snippetsDir
-    dependsOn test
-}
-
-test {
-    useJUnitPlatform()
-}
-
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.flywaydb:flyway-core')
-    compile('org.apache.commons:commons-lang3')
-    compile('org.modelmapper:modelmapper:2.3.2')
-    runtime('org.springframework.boot:spring-boot-devtools')
-    runtime('com.h2database:h2')
-
-    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
-
-    testCompile('javax.xml.bind:jaxb-api:2.2.11')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.springframework.security:spring-security-test')
-    testCompile('org.springframework.restdocs:spring-restdocs-core')
-    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
-
-    testCompile("org.assertj:assertj-core:3.10.0")
-    testCompile("org.mockito:mockito-core:2.21.0")
-    testCompile('org.mockito:mockito-junit-jupiter:2.21.0')
-    testCompile("org.junit.jupiter:junit-jupiter-api")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine")
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.flywaydb:flyway-core')
+    implementation('org.apache.commons:commons-lang3:3.8.1')
+    implementation('org.modelmapper:modelmapper:2.3.2')
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    runtimeOnly('com.h2database:h2')
+    testImplementation('javax.xml.bind:jaxb-api:2.2.11')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
 }

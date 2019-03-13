@@ -20,7 +20,7 @@ as a 1-day or 2-days training workshop.
 ### System Requirements
 
 * A Java SDK (at least version 8, tested with JDK versions 8, 9 and 11)
-* Any Java IDE (Eclipse, IntelliJ, VS Code, NetBeans, ...)
+* Any Java IDE ([Eclipse](https://www.eclipse.org/), [Spring Toolsuite](https://spring.io/tools), [IntelliJ](https://www.jetbrains.com/idea/), [VS Code](https://code.visualstudio.com/), [NetBeans](https://netbeans.org/), ...)
 
 ### Setup
 
@@ -30,9 +30,9 @@ you find the complete solution of the lab.
 
 As we are building the samples using [Gradle](https://gradle.org) your Java IDE should be capable use this.
 
-* As IntelliJ user support for Gradle is included by default.
-* As a Visual Studio Code user you have to install the following extensions: _java extension pack_, _spring boot extension pack_ and _gradle language support_.
-* As an Eclipse user you have to install a plugin via the marketplace
+* As [IntelliJ](https://www.jetbrains.com/idea/) user support for Gradle is included by default.
+* As a [Visual Studio Code](https://code.visualstudio.com/) user you have to install the following extensions: _java extension pack_, _spring boot extension pack_ and _gradle language support_.
+* As an [Eclipse](https://www.eclipse.org/) or [Spring ToolSuite](https://spring.io/tools) user you have to install a plugin via the marketplace
 
 ![eclipse](eclipse_gradle.png "eclipse")
 
@@ -52,9 +52,9 @@ or simply download it as a [zip archive](https://github.com/andifalk/spring-basi
 
 After that you can import the workshop project into your IDE
 
-* IntelliJ: "New project from existing sources..."
-* Eclipse: "Import/Gradle/Existing gradle project"
-* Visual Studio Code: Just open the root directory
+* [IntelliJ](https://www.jetbrains.com/idea): "New project from existing sources..."
+* [Eclipse](https://www.eclipse.org/) or [Spring ToolSuite](https://spring.io/tools): "Import/Gradle/Existing gradle project"
+* [Visual Studio Code](https://code.visualstudio.com/): Just open the root directory
 
 ### Table of Contents
 
@@ -74,21 +74,23 @@ After that you can import the workshop project into your IDE
     2. [Flyway Database Migrations](https://github.com/andifalk/spring-basics-training/tree/master/lab-11)
 4. Spring MVC Labs
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
+    1. [RESTful Services with HATEOAS](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
 5. Spring Security Labs
-    1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
+    1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-14)
 6. Testing Labs
-    1. [Unit and Integration Tests (Test slices)](https://github.com/andifalk/spring-basics-training/tree/master/lab-14)
+    1. [Unit and Integration Tests (Test slices)](https://github.com/andifalk/spring-basics-training/tree/master/lab-15)
     2. Security Tests (*Upcoming*)
-7. Reactive Spring (*Upcoming*)
-    1. Reactive Streams with Project Reactor
-    2. Reactive Persistence (MongoDB)
-    3. WebFlux: Annotated Controller
-    4. WebFlux: Router/Handler      
+7. Production Ready    
+    1. Actuators (*Upcoming*)
+    2. Actuator Security (*Upcoming*)
+8. Deploy Spring Boot Applications
+    1. CloudFoundry (*Upcoming*)
+    2. Kubernetes (*Upcoming*)
 
 ## License
 
 Apache 2.0 licensed
 
-Copyright (c) by 2018 Andreas Falk
+Copyright (c) by 2019 Andreas Falk
 
 [1]:http://www.apache.org/licenses/LICENSE-2.0.txt

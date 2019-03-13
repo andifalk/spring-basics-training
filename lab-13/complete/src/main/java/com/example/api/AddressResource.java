@@ -2,13 +2,14 @@ package com.example.api;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-public class AddressResource {
+public class AddressResource extends ResourceSupport {
 
   @NotNull private UUID identifier;
 

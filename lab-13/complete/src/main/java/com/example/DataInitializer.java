@@ -4,6 +4,7 @@ import com.example.entity.Address;
 import com.example.entity.Country;
 import com.example.entity.Person;
 import com.example.repository.PersonRepository;
+import com.example.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,12 @@ public class DataInitializer implements CommandLineRunner {
 
   private final PersonRepository personRepository;
 
+  private final PersonService personService;
+
   @Autowired
-  public DataInitializer(PersonRepository personRepository) {
+  public DataInitializer(PersonRepository personRepository, PersonService personService) {
     this.personRepository = personRepository;
+    this.personService = personService;
   }
 
   @Override
@@ -103,5 +107,7 @@ public class DataInitializer implements CommandLineRunner {
     Person personWithAddress =
         personRepository.findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase("hans", "mustermann");
     logger.info("Person {} with addresses {}", personWithAddress, personWithAddress.getAddresses());
+
+    logger.info("All cities the persons live in: {}", personService.findAllCitiesOfPersons());
   }
 }

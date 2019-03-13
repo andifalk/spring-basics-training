@@ -17,42 +17,43 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .httpBasic().and().formLogin()
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/persons/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/persons/*").hasRole("ADMIN")
-                .anyRequest().authenticated();
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.httpBasic()
+        .and()
+        .formLogin()
+        .and()
+        .authorizeRequests()
+        .antMatchers(HttpMethod.POST, "/persons/*")
+        .hasRole("ADMIN")
+        .antMatchers(HttpMethod.DELETE, "/persons/*")
+        .hasRole("ADMIN")
+        .anyRequest()
+        .authenticated();
+  }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User
-                        .withUsername("user@example.com")
-                        .password("user")
-                        .passwordEncoder(p -> passwordEncoder().encode(p))
-                        .roles("USER")
-                        .build(),
-                User
-                        .withUsername("admin@example.com")
-                        .password("admin")
-                        .passwordEncoder(p -> passwordEncoder().encode(p))
-                        .roles("USER", "ADMIN", "MONITOR")
-                        .build()
-        );
-    }
+  @Bean
+  public UserDetailsService userDetailsService() {
+    return new InMemoryUserDetailsManager(
+        User.withUsername("user@example.com")
+            .password("user")
+            .passwordEncoder(p -> passwordEncoder().encode(p))
+            .roles("USER")
+            .build(),
+        User.withUsername("admin@example.com")
+            .password("admin")
+            .passwordEncoder(p -> passwordEncoder().encode(p))
+            .roles("USER", "ADMIN", "MONITOR")
+            .build());
+  }
 }

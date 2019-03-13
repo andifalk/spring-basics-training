@@ -1,12 +1,13 @@
 package com.example.api;
 
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-public class PersonResource {
+public class PersonResource extends ResourceSupport {
 
   private UUID identifier;
 

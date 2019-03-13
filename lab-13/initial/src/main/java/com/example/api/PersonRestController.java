@@ -26,14 +26,16 @@ public class PersonRestController {
 
   private final PersonService personService;
 
+  private final ModelMapper modelMapper;
+
   @Autowired
-  public PersonRestController(PersonService personService) {
+  public PersonRestController(PersonService personService, ModelMapper modelMapper) {
     this.personService = personService;
+    this.modelMapper = modelMapper;
   }
 
   @GetMapping
   public List<PersonResource> getAllPersons() {
-    ModelMapper modelMapper = new ModelMapper();
     return personService
         .findAll()
         .stream()
@@ -48,7 +50,7 @@ public class PersonRestController {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.ok(new ModelMapper().map(person, PersonResource.class));
+    return ResponseEntity.ok(modelMapper.map(person, PersonResource.class));
   }
 
   @GetMapping("/{personId}/addresses")
@@ -63,18 +65,18 @@ public class PersonRestController {
         person
             .getAddresses()
             .stream()
-            .map(a -> new ModelMapper().map(a, AddressResource.class))
+            .map(a -> modelMapper.map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public PersonResource createPerson(@Valid @RequestBody PersonResource personResource) {
 
-    Person person = new ModelMapper().map(personResource, Person.class);
+    Person person = modelMapper.map(personResource, Person.class);
     if (person.getIdentifier() == null) {
       person.setIdentifier(UUID.randomUUID());
     }
-    return new ModelMapper().map(personService.save(person), PersonResource.class);
+    return modelMapper.map(personService.save(person), PersonResource.class);
   }
 
   @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -87,7 +89,7 @@ public class PersonRestController {
       return ResponseEntity.notFound().build();
     }
 
-    Address address = new ModelMapper().map(addressResource, Address.class);
+    Address address = modelMapper.map(addressResource, Address.class);
     if (address.getIdentifier() == null) {
       address.setIdentifier(UUID.randomUUID());
     }
@@ -97,7 +99,7 @@ public class PersonRestController {
             .save(person)
             .getAddresses()
             .stream()
-            .map(a -> new ModelMapper().map(a, AddressResource.class))
+            .map(a -> modelMapper.map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }
 
@@ -116,7 +118,6 @@ public class PersonRestController {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleInternalErrors(Exception ex) {
     LOGGER.error("General error: {}", ex.getMessage());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body("Submitted data is not valid");
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("A general error occurred");
   }
 }

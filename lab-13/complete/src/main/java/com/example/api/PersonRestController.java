@@ -11,12 +11,24 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -26,19 +38,29 @@ public class PersonRestController {
 
   private final PersonService personService;
 
+  private final ModelMapper modelMapper;
+
   @Autowired
-  public PersonRestController(PersonService personService) {
+  public PersonRestController(PersonService personService, ModelMapper modelMapper) {
     this.personService = personService;
+    this.modelMapper = modelMapper;
   }
 
   @GetMapping
-  public List<PersonResource> getAllPersons() {
-    ModelMapper modelMapper = new ModelMapper();
-    return personService
-        .findAll()
-        .stream()
-        .map(p -> modelMapper.map(p, PersonResource.class))
-        .collect(Collectors.toList());
+  public PersonListResource getAllPersons() {
+    PersonListResource personListResource =
+        new PersonListResource(
+            personService.findAll().stream()
+                .map(p -> modelMapper.map(p, PersonResource.class))
+                .peek(p -> p.add(linkTo(methodOn(PersonRestController.class).getPerson(p.getIdentifier()))
+                                .withSelfRel()))
+                .collect(Collectors.toList()));
+    personListResource.add(
+        linkTo(methodOn(PersonRestController.class).getAllPersons()).withSelfRel());
+    personListResource.add(
+        linkTo(methodOn(PersonRestController.class).createPerson(new PersonResource()))
+            .withRel("create"));
+    return personListResource;
   }
 
   @GetMapping("/{personId}")
@@ -48,7 +70,13 @@ public class PersonRestController {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.ok(new ModelMapper().map(person, PersonResource.class));
+    PersonResource personResource = modelMapper.map(person, PersonResource.class);
+    personResource.add(
+            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withSelfRel(),
+            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("update"),
+            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("delete"),
+            linkTo(methodOn(PersonRestController.class).getPersonAddresses(personIdentifier)).withRel("addresses"));
+    return ResponseEntity.ok(personResource);
   }
 
   @GetMapping("/{personId}/addresses")
@@ -63,22 +91,28 @@ public class PersonRestController {
         person
             .getAddresses()
             .stream()
-            .map(a -> new ModelMapper().map(a, AddressResource.class))
+            .map(a -> modelMapper.map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public PersonResource createPerson(@Valid @RequestBody PersonResource personResource) {
+  public ResponseEntity<PersonResource> createPerson(@Valid @RequestBody PersonResource personResource) {
 
-    Person person = new ModelMapper().map(personResource, Person.class);
+    Person person = modelMapper.map(personResource, Person.class);
     if (person.getIdentifier() == null) {
       person.setIdentifier(UUID.randomUUID());
     }
-    return new ModelMapper().map(personService.save(person), PersonResource.class);
+    URI location =
+            ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/persons")
+                    .path("/{personId}")
+                    .buildAndExpand(person.getIdentifier())
+                    .toUri();
+    return ResponseEntity.created(location).body(modelMapper.map(personService.save(person), PersonResource.class));
   }
 
   @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<List<AddressResource>> addAddress(
+  public ResponseEntity<AddressListResource> addAddress(
       @PathVariable("personId") UUID personIdentifier,
       @RequestBody AddressResource addressResource) {
 
@@ -87,18 +121,28 @@ public class PersonRestController {
       return ResponseEntity.notFound().build();
     }
 
-    Address address = new ModelMapper().map(addressResource, Address.class);
+    Address address = modelMapper.map(addressResource, Address.class);
     if (address.getIdentifier() == null) {
       address.setIdentifier(UUID.randomUUID());
     }
     person.getAddresses().add(address);
-    return ResponseEntity.ok(
+
+    URI location =
+            ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/persons")
+                    .path("/{personId}")
+                    .path("/addresses")
+                    .buildAndExpand(person.getIdentifier())
+                    .toUri();
+
+    return ResponseEntity.created(location).body(
+      new AddressListResource(
         personService
             .save(person)
             .getAddresses()
             .stream()
-            .map(a -> new ModelMapper().map(a, AddressResource.class))
-            .collect(Collectors.toList()));
+            .map(a -> modelMapper.map(a, AddressResource.class))
+            .collect(Collectors.toList())));
   }
 
   @DeleteMapping("/{personId}")
@@ -116,7 +160,6 @@ public class PersonRestController {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleInternalErrors(Exception ex) {
     LOGGER.error("General error: {}", ex.getMessage());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body("Submitted data is not valid");
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("A general error occurred");
   }
 }

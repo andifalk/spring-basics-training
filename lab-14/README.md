@@ -1,14 +1,14 @@
-# Lab 14: Unit and Integration Tests
-In this lab we add several tests to the implementation we have done so far in the previous labs.
+# Lab 14: Spring Security
+In this lab we add security to the implementation we have done so far in the previous labs (the RESTful service
+on top of the data access layer).
 
-After completing this lab you should know how to test typical spring web applications on different layers
-using unit and integration tests.
-To support this spring defines several test slices (e.g. *@DataJpaTest* or *@WebMvcTest*).
+After completing this lab you should know how to configure spring security for typical web applications.
+This includes authentication and authorization (web and method layer).
 
 ## Initial code
 
 There _initial_ project contains the spring boot application from previous lab with the RESTful service 
-and data access layer secured by spring security. 
+and data access layer. 
 
 In the _complete_ project you find the spring boot project containing a now secured RESTful service on top of 
 the data access layer with following classes/files:
@@ -26,12 +26,9 @@ the data access layer with following classes/files:
     * Person: Persistent *Person* entity
     * Address: Persistent *Address* entity
     * Country: An enum for countries (used in *Address*)
-    * PersonBuilder: Helper class for easier creation of person test objects in tests
-    * AddressBuilder: Helper class for easier creation of address test objects in tests
 * V01_InitialSchema.sql: The flyway db migration script (executed automatically at application start)
 * application.yml: Externalized (default) configuration for the application in YAML format
 * http/...: Sample requests for RESTful service (to use in IntelliJ)
-* src/docs/asciidoc/api-guide.adoc: Asciidoc document required for Spring RestDocs api documentation
  
 ## Steps to complete
 

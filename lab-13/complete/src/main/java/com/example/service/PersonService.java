@@ -4,7 +4,6 @@ import com.example.entity.Address;
 import com.example.entity.Person;
 import com.example.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class PersonService {
 
   private final PersonRepository personRepository;
@@ -41,13 +39,11 @@ public class PersonService {
     return personRepository.findAll();
   }
 
-  @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   public Person save(Person person) {
     return personRepository.save(person);
   }
 
-  @PreAuthorize("hasRole('ADMIN')")
   @Transactional
   public void deleteByIdentifier(UUID identifier) {
     personRepository.deleteByIdentifier(identifier);

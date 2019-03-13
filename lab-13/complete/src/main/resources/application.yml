@@ -10,8 +10,3 @@ logging:
         orm:
           jpa:
             JpaTransactionManager: trace
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
