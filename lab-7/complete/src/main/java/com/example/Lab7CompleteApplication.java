@@ -9,5 +9,4 @@ public class Lab7CompleteApplication {
   public static void main(String[] args) {
     SpringApplication.run(Lab7CompleteApplication.class, args);
   }
-
 }

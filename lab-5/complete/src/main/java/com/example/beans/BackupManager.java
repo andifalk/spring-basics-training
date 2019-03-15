@@ -8,18 +8,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class BackupManager {
 
-    private Storage storage;
+  private Storage storage;
 
-    @Autowired
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
+  @Autowired
+  public void setStorage(Storage storage) {
+    this.storage = storage;
+  }
 
-    public void backup() {
-        Logger logger = LoggerFactory.getLogger(this.getClass());
-        logger.info("Starting backup...");
-        storage.store();
-        logger.info("Finished backup");
-    }
-
+  public void backup() {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+    logger.info("Starting backup...");
+    storage.store();
+    logger.info("Finished backup");
+  }
 }

@@ -11,7 +11,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,95 +30,95 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class PersonRestController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonRestController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PersonRestController.class);
 
-    private final PersonService personService;
+  private final PersonService personService;
 
-    @Autowired
-    public PersonRestController(PersonService personService) {
-        this.personService = personService;
+  @Autowired
+  public PersonRestController(PersonService personService) {
+    this.personService = personService;
+  }
+
+  @GetMapping
+  public List<PersonResource> getAllPersons() {
+    ModelMapper modelMapper = new ModelMapper();
+    return personService.findAll().stream()
+        .map(p -> modelMapper.map(p, PersonResource.class))
+        .collect(Collectors.toList());
+  }
+
+  @GetMapping("/{personId}")
+  public ResponseEntity<PersonResource> getPerson(@PathVariable("personId") UUID personIdentifier) {
+    Person person = personService.findOneByIdentifier(personIdentifier);
+    if (person == null) {
+      return ResponseEntity.notFound().build();
     }
 
-    @GetMapping
-    public List<PersonResource> getAllPersons() {
-        ModelMapper modelMapper = new ModelMapper();
-        return personService.findAll()
-                .stream()
-                .map(p -> modelMapper.map(p, PersonResource.class))
-                .collect(Collectors.toList());
+    return ResponseEntity.ok(new ModelMapper().map(person, PersonResource.class));
+  }
+
+  @GetMapping("/{personId}/addresses")
+  public ResponseEntity<List<AddressResource>> getPersonAddresses(
+      @PathVariable("personId") UUID personIdentifier) {
+    Person person = personService.findOneByIdentifier(personIdentifier);
+    if (person == null) {
+      return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{personId}")
-    public ResponseEntity<PersonResource> getPerson(@PathVariable("personId") UUID personIdentifier) {
-        Person person = personService.findOneByIdentifier(personIdentifier);
-        if (person == null) {
-            return ResponseEntity.notFound().build();
-        }
+    return ResponseEntity.ok(
+        person.getAddresses().stream()
+            .map(a -> new ModelMapper().map(a, AddressResource.class))
+            .collect(Collectors.toList()));
+  }
 
-        return ResponseEntity.ok(new ModelMapper().map(person, PersonResource.class));
+  @ResponseStatus(HttpStatus.CREATED)
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public PersonResource createPerson(@Valid @RequestBody PersonResource personResource) {
+
+    Person person = new ModelMapper().map(personResource, Person.class);
+    if (person.getIdentifier() == null) {
+      person.setIdentifier(UUID.randomUUID());
+    }
+    return new ModelMapper().map(personService.save(person), PersonResource.class);
+  }
+
+  @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public ResponseEntity<List<AddressResource>> addAddress(
+      @PathVariable("personId") UUID personIdentifier,
+      @RequestBody AddressResource addressResource) {
+
+    Person person = personService.findOneByIdentifier(personIdentifier);
+    if (person == null) {
+      return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{personId}/addresses")
-    public ResponseEntity<List<AddressResource>> getPersonAddresses(@PathVariable("personId") UUID personIdentifier) {
-        Person person = personService.findOneByIdentifier(personIdentifier);
-        if (person == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(person.getAddresses()
-                .stream()
-                .map(a -> new ModelMapper().map(a, AddressResource.class))
-                .collect(Collectors.toList()));
+    Address address = new ModelMapper().map(addressResource, Address.class);
+    if (address.getIdentifier() == null) {
+      address.setIdentifier(UUID.randomUUID());
     }
+    person.getAddresses().add(address);
+    return ResponseEntity.ok(
+        personService.save(person).getAddresses().stream()
+            .map(a -> new ModelMapper().map(a, AddressResource.class))
+            .collect(Collectors.toList()));
+  }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public PersonResource createPerson(@Valid @RequestBody PersonResource personResource) {
+  @DeleteMapping("/{personId}")
+  public ResponseEntity<Void> deletePerson(@PathVariable("personId") UUID personIdentifier) {
+    personService.deleteByIdentifier(personIdentifier);
+    return ResponseEntity.noContent().build();
+  }
 
-        Person person = new ModelMapper().map(personResource, Person.class);
-        if (person.getIdentifier() == null) {
-            person.setIdentifier(UUID.randomUUID());
-        }
-        return new ModelMapper().map(personService.save(person), PersonResource.class);
-    }
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<String> handleIntegrityViolations(DataIntegrityViolationException ex) {
+    LOGGER.error("Integrity violation: {}", ex.getMessage());
+    return ResponseEntity.badRequest().body("Submitted data is not valid");
+  }
 
-    @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<AddressResource>> addAddress(@PathVariable("personId") UUID personIdentifier, @RequestBody AddressResource addressResource) {
-
-        Person person = personService.findOneByIdentifier(personIdentifier);
-        if (person == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Address address = new ModelMapper().map(addressResource, Address.class);
-        if (address.getIdentifier() == null) {
-            address.setIdentifier(UUID.randomUUID());
-        }
-        person.getAddresses().add(address);
-        return ResponseEntity.ok(personService.save(person).getAddresses()
-                .stream()
-                .map(a -> new ModelMapper().map(a, AddressResource.class))
-                .collect(Collectors.toList()));
-
-    }
-
-    @DeleteMapping("/{personId}")
-    public ResponseEntity<Void> deletePerson(@PathVariable("personId") UUID personIdentifier) {
-        personService.deleteByIdentifier(personIdentifier);
-        return ResponseEntity.noContent().build();
-    }
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<String> handleIntegrityViolations(DataIntegrityViolationException ex) {
-        LOGGER.error("Integrity violation: {}", ex.getMessage());
-        return ResponseEntity.badRequest().body("Submitted data is not valid");
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleInternalErrors(Exception ex) {
-        LOGGER.error("General error: {}", ex.getMessage());
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<String> handleInternalErrors(Exception ex) {
+    LOGGER.error("General error: {}", ex.getMessage());
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
         .body("Submitted data is not valid");
-    }
-
+  }
 }

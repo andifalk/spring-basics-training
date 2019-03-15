@@ -52,7 +52,12 @@ public class PersonRestController {
         new PersonListResource(
             personService.findAll().stream()
                 .map(p -> modelMapper.map(p, PersonResource.class))
-                .peek(p -> p.add(linkTo(methodOn(PersonRestController.class).getPerson(p.getIdentifier()))
+                .peek(
+                    p ->
+                        p.add(
+                            linkTo(
+                                    methodOn(PersonRestController.class)
+                                        .getPerson(p.getIdentifier()))
                                 .withSelfRel()))
                 .collect(Collectors.toList()));
     personListResource.add(
@@ -72,10 +77,11 @@ public class PersonRestController {
 
     PersonResource personResource = modelMapper.map(person, PersonResource.class);
     personResource.add(
-            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withSelfRel(),
-            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("update"),
-            linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("delete"),
-            linkTo(methodOn(PersonRestController.class).getPersonAddresses(personIdentifier)).withRel("addresses"));
+        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withSelfRel(),
+        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("update"),
+        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("delete"),
+        linkTo(methodOn(PersonRestController.class).getPersonAddresses(personIdentifier))
+            .withRel("addresses"));
     return ResponseEntity.ok(personResource);
   }
 
@@ -88,27 +94,27 @@ public class PersonRestController {
     }
 
     return ResponseEntity.ok(
-        person
-            .getAddresses()
-            .stream()
+        person.getAddresses().stream()
             .map(a -> modelMapper.map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<PersonResource> createPerson(@Valid @RequestBody PersonResource personResource) {
+  public ResponseEntity<PersonResource> createPerson(
+      @Valid @RequestBody PersonResource personResource) {
 
     Person person = modelMapper.map(personResource, Person.class);
     if (person.getIdentifier() == null) {
       person.setIdentifier(UUID.randomUUID());
     }
     URI location =
-            ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/persons")
-                    .path("/{personId}")
-                    .buildAndExpand(person.getIdentifier())
-                    .toUri();
-    return ResponseEntity.created(location).body(modelMapper.map(personService.save(person), PersonResource.class));
+        ServletUriComponentsBuilder.fromCurrentContextPath()
+            .path("/persons")
+            .path("/{personId}")
+            .buildAndExpand(person.getIdentifier())
+            .toUri();
+    return ResponseEntity.created(location)
+        .body(modelMapper.map(personService.save(person), PersonResource.class));
   }
 
   @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -128,21 +134,19 @@ public class PersonRestController {
     person.getAddresses().add(address);
 
     URI location =
-            ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/persons")
-                    .path("/{personId}")
-                    .path("/addresses")
-                    .buildAndExpand(person.getIdentifier())
-                    .toUri();
+        ServletUriComponentsBuilder.fromCurrentContextPath()
+            .path("/persons")
+            .path("/{personId}")
+            .path("/addresses")
+            .buildAndExpand(person.getIdentifier())
+            .toUri();
 
-    return ResponseEntity.created(location).body(
-      new AddressListResource(
-        personService
-            .save(person)
-            .getAddresses()
-            .stream()
-            .map(a -> modelMapper.map(a, AddressResource.class))
-            .collect(Collectors.toList())));
+    return ResponseEntity.created(location)
+        .body(
+            new AddressListResource(
+                personService.save(person).getAddresses().stream()
+                    .map(a -> modelMapper.map(a, AddressResource.class))
+                    .collect(Collectors.toList())));
   }
 
   @DeleteMapping("/{personId}")

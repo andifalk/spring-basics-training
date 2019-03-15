@@ -15,78 +15,77 @@ import javax.annotation.PreDestroy;
 @Component
 public class MyLifecycleBean implements InitializingBean, DisposableBean, SmartLifecycle {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyLifecycleBean.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyLifecycleBean.class);
 
-    private boolean running;
+  private boolean running;
 
-    public MyLifecycleBean() {
-        LOGGER.info("Constructor called");
-    }
+  public MyLifecycleBean() {
+    LOGGER.info("Constructor called");
+  }
 
-    @Override
-    public void afterPropertiesSet() {
-        LOGGER.info("InitializingBean#afterPropertiesSet() called: {}", this);
-    }
+  @Override
+  public void afterPropertiesSet() {
+    LOGGER.info("InitializingBean#afterPropertiesSet() called: {}", this);
+  }
 
-    @PostConstruct
-    public void init() {
-        LOGGER.info("@PostConstruct called: {}", this);
-    }
+  @PostConstruct
+  public void init() {
+    LOGGER.info("@PostConstruct called: {}", this);
+  }
 
+  @Override
+  public boolean isAutoStartup() {
+    return true;
+  }
 
-    @Override
-    public boolean isAutoStartup() {
-        return true;
-    }
+  @Override
+  public void stop(Runnable callback) {
+    LOGGER.info("SmartLifecycle#stop(Runnable) called: {}", this);
+    callback.run();
+    running = false;
+  }
 
-    @Override
-    public void stop(Runnable callback) {
-        LOGGER.info("SmartLifecycle#stop(Runnable) called: {}", this);
-        callback.run();
-        running = false;
-    }
+  @Override
+  public void start() {
+    running = true;
+    LOGGER.info("SmartLifecycle#start() called: {}", this);
+  }
 
-    @Override
-    public void start() {
-        running = true;
-        LOGGER.info("SmartLifecycle#start() called: {}", this);
-    }
+  @Override
+  public void stop() {
+    LOGGER.info("SmartLifecycle#stop() called: {}", this);
+    running = false;
+  }
 
-    @Override
-    public void stop() {
-        LOGGER.info("SmartLifecycle#stop() called: {}", this);
-        running = false;
-    }
+  @Override
+  public boolean isRunning() {
+    return running;
+  }
 
-    @Override
-    public boolean isRunning() {
-        return running;
-    }
+  @Override
+  public int getPhase() {
+    return 1;
+  }
 
-    @Override
-    public int getPhase() {
-        return 1;
-    }
+  public String sayHello() {
+    LOGGER.info("sayHello() called: {}", this);
+    return "Hello from Lifecycle";
+  }
 
-    public String sayHello() {
-        LOGGER.info("sayHello() called: {}", this);
-        return "Hello from Lifecycle";
-    }
+  @Override
+  public void destroy() {
+    LOGGER.info("DisposableBean#destroy() called: {}", this);
+  }
 
-    @Override
-    public void destroy() {
-        LOGGER.info("DisposableBean#destroy() called: {}", this);
-    }
+  @PreDestroy
+  public void cleanUp() {
+    LOGGER.info("@PreDestroy called: {}", this);
+  }
 
-    @PreDestroy
-    public void cleanUp() {
-        LOGGER.info("@PreDestroy called: {}", this);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("running", running)
-                .toString();
-    }
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .append("running", running)
+        .toString();
+  }
 }

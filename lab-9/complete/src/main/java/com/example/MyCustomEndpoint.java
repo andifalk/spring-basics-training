@@ -8,29 +8,28 @@ import org.springframework.stereotype.Component;
 @WebEndpoint(id = "custom")
 public class MyCustomEndpoint {
 
-    @ReadOperation
-    public MyStatus myValue() {
-        return new MyStatus(200, "ok");
+  @ReadOperation
+  public MyStatus myValue() {
+    return new MyStatus(200, "ok");
+  }
+
+  class MyStatus {
+    private int status;
+    private String detail;
+
+    public MyStatus() {}
+
+    public MyStatus(int status, String detail) {
+      this.status = status;
+      this.detail = detail;
     }
 
-    class MyStatus {
-        private int status;
-        private String detail;
-
-        public MyStatus() {
-        }
-
-        public MyStatus(int status, String detail) {
-            this.status = status;
-            this.detail = detail;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-
-        public String getDetail() {
-            return detail;
-        }
+    public int getStatus() {
+      return status;
     }
+
+    public String getDetail() {
+      return detail;
+    }
+  }
 }

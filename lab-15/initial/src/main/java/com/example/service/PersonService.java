@@ -17,48 +17,48 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class PersonService {
 
-    private final PersonRepository personRepository;
+  private final PersonRepository personRepository;
 
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
+  @Autowired
+  public PersonService(PersonRepository personRepository) {
+    this.personRepository = personRepository;
+  }
 
-    public Person findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName) {
-        return personRepository.findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
-    }
+  public Person findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(
+      String firstName, String lastName) {
+    return personRepository.findOneByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
+  }
 
-    public List<Person> findAllByLastNameIgnoreCase(String lastName) {
-        return personRepository.findAllByLastNameIgnoreCase(lastName);
-    }
+  public List<Person> findAllByLastNameIgnoreCase(String lastName) {
+    return personRepository.findAllByLastNameIgnoreCase(lastName);
+  }
 
-    public Person findOneByIdentifier(UUID identifier) {
-        return personRepository.findOneByIdentifier(identifier);
-    }
+  public Person findOneByIdentifier(UUID identifier) {
+    return personRepository.findOneByIdentifier(identifier);
+  }
 
-    public List<Person> findAll() {
-        return personRepository.findAll();
-    }
+  public List<Person> findAll() {
+    return personRepository.findAll();
+  }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @Transactional
-    public Person save(Person person) {
-        return personRepository.save(person);
-    }
+  @PreAuthorize("hasRole('ADMIN')")
+  @Transactional
+  public Person save(Person person) {
+    return personRepository.save(person);
+  }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @Transactional
-    public void deleteByIdentifier(UUID identifier) {
-        personRepository.deleteByIdentifier(identifier);
-    }
+  @PreAuthorize("hasRole('ADMIN')")
+  @Transactional
+  public void deleteByIdentifier(UUID identifier) {
+    personRepository.deleteByIdentifier(identifier);
+  }
 
-    public String findAllCitiesOfPersons() {
-        // Warning: This produces unwanted N+1 sql problems by navigating to addresses with lazy loading!!!
-        // If you perform this outside a transaction boundary you even will get an error!
-        return personRepository.findAll()
-                .stream()
-                .map(p -> p.getAddresses().stream().map(Address::getCity).collect(Collectors.joining(",")))
-                .collect(Collectors.joining(","));
-    }
-
+  public String findAllCitiesOfPersons() {
+    // Warning: This produces unwanted N+1 sql problems by navigating to addresses with lazy
+    // loading!!!
+    // If you perform this outside a transaction boundary you even will get an error!
+    return personRepository.findAll().stream()
+        .map(p -> p.getAddresses().stream().map(Address::getCity).collect(Collectors.joining(",")))
+        .collect(Collectors.joining(","));
+  }
 }

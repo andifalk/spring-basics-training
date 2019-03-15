@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoRestController {
 
-    private final MyConfigurationProperties properties;
+  private final MyConfigurationProperties properties;
 
-    @Value("${info.application.name}")
-    private String appName;
+  @Value("${info.application.name}")
+  private String appName;
 
-    @Autowired
-    public DemoRestController(MyConfigurationProperties properties) {
-        this.properties = properties;
-    }
+  @Autowired
+  public DemoRestController(MyConfigurationProperties properties) {
+    this.properties = properties;
+  }
 
-    @GetMapping("/")
-    public String hello() {
-        return properties.getMessage() + " from " + appName;
-    }
+  @GetMapping("/")
+  public String hello() {
+    return properties.getMessage() + " from " + appName;
+  }
 }

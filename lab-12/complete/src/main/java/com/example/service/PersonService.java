@@ -32,7 +32,7 @@ public class PersonService {
   }
 
   public Person findOneByIdentifier(UUID identifier) {
-    return personRepository.findOneByIdentifier(identifier);
+    return personRepository.findOneWithDetailsByIdentifier(identifier);
   }
 
   public List<Person> findAll() {
@@ -53,9 +53,7 @@ public class PersonService {
     // Warning: This produces unwanted N+1 sql problems by navigating to addresses with lazy
     // loading!!!
     // If you perform this outside a transaction boundary you even will get an error!
-    return personRepository
-        .findAll()
-        .stream()
+    return personRepository.findAll().stream()
         .map(p -> p.getAddresses().stream().map(Address::getCity).collect(Collectors.joining(",")))
         .collect(Collectors.joining(","));
   }

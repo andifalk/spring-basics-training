@@ -5,6 +5,4 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
-public class PersonService {
-
-}
+public class PersonService {}

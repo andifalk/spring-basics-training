@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Harddisk implements Storage {
 
-    @Override
-    public void store() {
-        LoggerFactory.getLogger(this.getClass()).info("Store to HD");
-    }
+  @Override
+  public void store() {
+    LoggerFactory.getLogger(this.getClass()).info("Store to HD");
+  }
 }

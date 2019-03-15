@@ -74,7 +74,7 @@ After that you can import the workshop project into your IDE
     2. [Flyway Database Migrations](https://github.com/andifalk/spring-basics-training/tree/master/lab-11)
 4. Spring MVC Labs
     1. [RESTful Services](https://github.com/andifalk/spring-basics-training/tree/master/lab-12)
-    1. [RESTful Services with HATEOAS](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
+    2. [RESTful Services with HATEOAS](https://github.com/andifalk/spring-basics-training/tree/master/lab-13)
 5. Spring Security Labs
     1. [Authentication and Authorization](https://github.com/andifalk/spring-basics-training/tree/master/lab-14)
     2. Actuator Security (*Upcoming*)

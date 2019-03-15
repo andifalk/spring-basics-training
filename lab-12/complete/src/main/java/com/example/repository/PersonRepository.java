@@ -17,7 +17,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
   List<Person> findAllByLastNameIgnoreCase(String lastName);
 
   @EntityGraph(attributePaths = "addresses")
-  Person findOneByIdentifier(UUID identifier);
+  Person findOneWithDetailsByIdentifier(UUID identifier);
 
   @Query(
       "SELECT DISTINCT p FROM Person p LEFT JOIN p.addresses adr JOIN FETCH p.addresses WHERE adr.city = :city")

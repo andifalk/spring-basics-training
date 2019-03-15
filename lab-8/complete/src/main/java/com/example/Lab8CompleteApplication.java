@@ -11,5 +11,4 @@ public class Lab8CompleteApplication {
   public static void main(String[] args) {
     SpringApplication.run(Lab8CompleteApplication.class, args);
   }
-
 }

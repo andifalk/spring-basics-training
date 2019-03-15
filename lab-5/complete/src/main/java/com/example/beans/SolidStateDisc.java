@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SolidStateDisc implements Storage {
 
-    @Override
-    public void store() {
-        LoggerFactory.getLogger(this.getClass()).info("Store to SSD");
-    }
+  @Override
+  public void store() {
+    LoggerFactory.getLogger(this.getClass()).info("Store to SSD");
+  }
 }

@@ -9,14 +9,13 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties(prefix = "myprops")
 public class MyConfigurationProperties {
 
-    @NotNull
-    private String message;
+  @NotNull private String message;
 
-    public String getMessage() {
-        return message;
-    }
+  public String getMessage() {
+    return message;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

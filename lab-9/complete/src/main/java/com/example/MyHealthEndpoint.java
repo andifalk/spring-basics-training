@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyHealthEndpoint implements HealthIndicator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyHealthEndpoint.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyHealthEndpoint.class);
 
-    @Override
-    public Health health() {
-        LOGGER.trace("Custom health endpoint called");
-        return Health.up().withDetail("mykey", "value").build();
-    }
+  @Override
+  public Health health() {
+    LOGGER.trace("Custom health endpoint called");
+    return Health.up().withDetail("mykey", "value").build();
+  }
 }

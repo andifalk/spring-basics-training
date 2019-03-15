@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompactDisc implements Storage {
 
-    @Override
-    public void store() {
-        LoggerFactory.getLogger(this.getClass()).info("Store to CD");
-    }
+  @Override
+  public void store() {
+    LoggerFactory.getLogger(this.getClass()).info("Store to CD");
+  }
 }

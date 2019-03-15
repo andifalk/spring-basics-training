@@ -11,7 +11,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,9 +41,7 @@ public class PersonRestController {
   @GetMapping
   public List<PersonResource> getAllPersons() {
     ModelMapper modelMapper = new ModelMapper();
-    return personService
-        .findAll()
-        .stream()
+    return personService.findAll().stream()
         .map(p -> modelMapper.map(p, PersonResource.class))
         .collect(Collectors.toList());
   }
@@ -60,9 +65,7 @@ public class PersonRestController {
     }
 
     return ResponseEntity.ok(
-        person
-            .getAddresses()
-            .stream()
+        person.getAddresses().stream()
             .map(a -> new ModelMapper().map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }
@@ -93,10 +96,7 @@ public class PersonRestController {
     }
     person.getAddresses().add(address);
     return ResponseEntity.ok(
-        personService
-            .save(person)
-            .getAddresses()
-            .stream()
+        personService.save(person).getAddresses().stream()
             .map(a -> new ModelMapper().map(a, AddressResource.class))
             .collect(Collectors.toList()));
   }

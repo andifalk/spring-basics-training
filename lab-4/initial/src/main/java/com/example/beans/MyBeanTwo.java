@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanTwo {
 
-    public String operationTwo(String msg) {
-        if (StringUtils.isBlank(msg)) {
-            throw new IllegalArgumentException("No message");
-        }
-
-        return "Two: " + msg;
+  public String operationTwo(String msg) {
+    if (StringUtils.isBlank(msg)) {
+      throw new IllegalArgumentException("No message");
     }
 
+    return "Two: " + msg;
+  }
 }

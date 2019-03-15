@@ -1,16 +1,17 @@
 # Lab 13: RESTful Services with HATEOAS
-In this lab we implement a RESTful service on top of the service and data access layer we have
-build in the previous lab.
+In this lab we extend the RESTful service we have build in the previous lab to use HATEOAS.
 
-After completing this lab you should know how to implement the different REST operations like
-GET, POST and DELETE.
+HATEOAS (Hypertext As The Engine Of Application State) Restful services fulfill 
+the highest level 3 of the [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html#level3)
+
+After completing this lab you should know how to implement the hypermedia controls for your Restful service.
 
 ## Initial code
 
 There _initial_ project contains the spring boot application from previous lab with the service 
 and data access layer. 
 
-In the _complete_ project you find the spring boot project containing a RESTful service on top of 
+In the _complete_ project you find the spring boot project containing a RESTful service with HATEOAS on top of 
 the data access layer with following classes/files:
 
 * CompleteApplication: This is the generated starter class to start the spring boot application (contains a main() method).
@@ -20,7 +21,9 @@ the data access layer with following classes/files:
 * PersonRestController: The spring rest controller defining the RESTful service
 * Resources:
     * PersonResource: The REST resource for a person
+    * PersonListResource: The REST resource representing a list of *PersonResource* resource objects
     * AddressResource: The REST resource for an address
+    * AddressListResource: The REST resource representing a list of *AddressResource* resource objects
 * Entities:
     * Person: Persistent *Person* entity
     * Address: Persistent *Address* entity

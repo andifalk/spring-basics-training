@@ -2,8 +2,5 @@ package com.example;
 
 public class XmlFileApplication {
 
-    public static void main(String[] args) {
-
-    }
-
+  public static void main(String[] args) {}
 }
