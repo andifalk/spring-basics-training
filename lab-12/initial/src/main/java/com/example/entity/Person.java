@@ -21,7 +21,6 @@ import java.util.UUID;
     })
 public class Person extends AbstractPersistable<Long> {
 
-  @NotNull
   @Column(unique = true)
   private UUID identifier;
 

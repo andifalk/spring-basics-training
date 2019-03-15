@@ -32,7 +32,7 @@ public class PersonService {
   }
 
   public Person findOneByIdentifier(UUID identifier) {
-    return personRepository.findOneByIdentifier(identifier);
+    return personRepository.findOneWithDetailsByIdentifier(identifier);
   }
 
   public List<Person> findAll() {

@@ -5,7 +5,7 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET http://localhost:8080/persons/1c84b355-568a-40d0-8156-d2cc28075a87
+GET http://localhost:8080/persons/7f680c0f-c381-4b39-9e46-f5fb9faaeb73
 Accept: application/json
 
 

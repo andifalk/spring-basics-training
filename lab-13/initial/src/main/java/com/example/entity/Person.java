@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -21,7 +22,6 @@ import java.util.UUID;
     })
 public class Person extends AbstractPersistable<Long> {
 
-  @NotNull
   @Column(unique = true)
   private UUID identifier;
 
@@ -33,6 +33,7 @@ public class Person extends AbstractPersistable<Long> {
   @Size(min = 1, max = 50)
   private String lastName;
 
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL)
   private List<Address> addresses;
 
@@ -43,6 +44,18 @@ public class Person extends AbstractPersistable<Long> {
     this.firstName = firstName;
     this.lastName = lastName;
     this.addresses = addresses;
+  }
+
+  @JsonIgnore
+  @Override
+  public boolean isNew() {
+    return super.isNew();
+  }
+
+  @JsonIgnore
+  @Override
+  public Long getId() {
+    return super.getId();
   }
 
   public UUID getIdentifier() {

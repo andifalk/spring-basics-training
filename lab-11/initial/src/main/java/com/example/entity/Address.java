@@ -88,6 +88,34 @@ public class Address extends AbstractPersistable<Long> {
     return phone;
   }
 
+  public void setIdentifier(UUID identifier) {
+    this.identifier = identifier;
+  }
+
+  public void setStreet(String street) {
+    this.street = street;
+  }
+
+  public void setZipCode(String zipCode) {
+    this.zipCode = zipCode;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public void setCountry(Country country) {
+    this.country = country;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
   @Override
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)

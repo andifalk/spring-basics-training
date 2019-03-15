@@ -23,12 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -38,34 +33,32 @@ public class PersonRestController {
 
   private final PersonService personService;
 
+  private final PersonResourceAssembler personResourceAssembler;
+
+  private final AddressResourceAssembler addressResourceAssembler;
+
+  private final PersonListResourceAssembler personListResourceAssembler;
+
+  private final AddressListResourceAssembler addressListResourceAssembler;
+
   private final ModelMapper modelMapper;
 
   @Autowired
-  public PersonRestController(PersonService personService, ModelMapper modelMapper) {
+  public PersonRestController(PersonService personService, PersonResourceAssembler personResourceAssembler,
+                              AddressResourceAssembler addressResourceAssembler,
+                              PersonListResourceAssembler personListResourceAssembler,
+                              AddressListResourceAssembler addressListResourceAssembler, ModelMapper modelMapper) {
     this.personService = personService;
+    this.personResourceAssembler = personResourceAssembler;
+    this.addressResourceAssembler = addressResourceAssembler;
+    this.personListResourceAssembler = personListResourceAssembler;
+    this.addressListResourceAssembler = addressListResourceAssembler;
     this.modelMapper = modelMapper;
   }
 
   @GetMapping
   public PersonListResource getAllPersons() {
-    PersonListResource personListResource =
-        new PersonListResource(
-            personService.findAll().stream()
-                .map(p -> modelMapper.map(p, PersonResource.class))
-                .peek(
-                    p ->
-                        p.add(
-                            linkTo(
-                                    methodOn(PersonRestController.class)
-                                        .getPerson(p.getIdentifier()))
-                                .withSelfRel()))
-                .collect(Collectors.toList()));
-    personListResource.add(
-        linkTo(methodOn(PersonRestController.class).getAllPersons()).withSelfRel());
-    personListResource.add(
-        linkTo(methodOn(PersonRestController.class).createPerson(new PersonResource()))
-            .withRel("create"));
-    return personListResource;
+    return personListResourceAssembler.toResource(personService.findAll());
   }
 
   @GetMapping("/{personId}")
@@ -75,18 +68,11 @@ public class PersonRestController {
       return ResponseEntity.notFound().build();
     }
 
-    PersonResource personResource = modelMapper.map(person, PersonResource.class);
-    personResource.add(
-        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withSelfRel(),
-        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("update"),
-        linkTo(methodOn(PersonRestController.class).getPerson(personIdentifier)).withRel("delete"),
-        linkTo(methodOn(PersonRestController.class).getPersonAddresses(personIdentifier))
-            .withRel("addresses"));
-    return ResponseEntity.ok(personResource);
+    return ResponseEntity.ok(personResourceAssembler.toResource(person));
   }
 
   @GetMapping("/{personId}/addresses")
-  public ResponseEntity<List<AddressResource>> getPersonAddresses(
+  public ResponseEntity<AddressListResource> getPersonAddresses(
       @PathVariable("personId") UUID personIdentifier) {
     Person person = personService.findOneByIdentifier(personIdentifier);
     if (person == null) {
@@ -94,9 +80,7 @@ public class PersonRestController {
     }
 
     return ResponseEntity.ok(
-        person.getAddresses().stream()
-            .map(a -> modelMapper.map(a, AddressResource.class))
-            .collect(Collectors.toList()));
+            addressListResourceAssembler.toResource(person.getAddresses()));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -114,7 +98,7 @@ public class PersonRestController {
             .buildAndExpand(person.getIdentifier())
             .toUri();
     return ResponseEntity.created(location)
-        .body(modelMapper.map(personService.save(person), PersonResource.class));
+        .body(personResourceAssembler.toResource(personService.save(person)));
   }
 
   @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -142,11 +126,8 @@ public class PersonRestController {
             .toUri();
 
     return ResponseEntity.created(location)
-        .body(
-            new AddressListResource(
-                personService.save(person).getAddresses().stream()
-                    .map(a -> modelMapper.map(a, AddressResource.class))
-                    .collect(Collectors.toList())));
+        .body(addressListResourceAssembler.toResource(
+                personService.save(person).getAddresses()));
   }
 
   @DeleteMapping("/{personId}")

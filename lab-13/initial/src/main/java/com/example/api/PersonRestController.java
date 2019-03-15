@@ -3,7 +3,6 @@ package com.example.api;
 import com.example.entity.Address;
 import com.example.entity.Person;
 import com.example.service.PersonService;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -33,74 +33,79 @@ public class PersonRestController {
 
   private final PersonService personService;
 
-  private final ModelMapper modelMapper;
-
   @Autowired
-  public PersonRestController(PersonService personService, ModelMapper modelMapper) {
+  public PersonRestController(PersonService personService) {
     this.personService = personService;
-    this.modelMapper = modelMapper;
   }
 
   @GetMapping
-  public List<PersonResource> getAllPersons() {
-    return personService.findAll().stream()
-        .map(p -> modelMapper.map(p, PersonResource.class))
-        .collect(Collectors.toList());
+  public List<Person> getAllPersons() {
+    return personService.findAll();
   }
 
   @GetMapping("/{personId}")
-  public ResponseEntity<PersonResource> getPerson(@PathVariable("personId") UUID personIdentifier) {
+  public ResponseEntity<Person> getPerson(@PathVariable("personId") UUID personIdentifier) {
     Person person = personService.findOneByIdentifier(personIdentifier);
     if (person == null) {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.ok(modelMapper.map(person, PersonResource.class));
+    return ResponseEntity.ok(person);
   }
 
   @GetMapping("/{personId}/addresses")
-  public ResponseEntity<List<AddressResource>> getPersonAddresses(
+  public ResponseEntity<List<Address>> getPersonAddresses(
       @PathVariable("personId") UUID personIdentifier) {
     Person person = personService.findOneByIdentifier(personIdentifier);
     if (person == null) {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.ok(
-        person.getAddresses().stream()
-            .map(a -> modelMapper.map(a, AddressResource.class))
-            .collect(Collectors.toList()));
+    return ResponseEntity.ok(person.getAddresses());
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public PersonResource createPerson(@Valid @RequestBody PersonResource personResource) {
+  public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) {
 
-    Person person = modelMapper.map(personResource, Person.class);
     if (person.getIdentifier() == null) {
       person.setIdentifier(UUID.randomUUID());
     }
-    return modelMapper.map(personService.save(person), PersonResource.class);
+
+    URI location =
+            ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/persons")
+                    .path("/{personId}")
+                    .buildAndExpand(person.getIdentifier())
+                    .toUri();
+    return ResponseEntity.created(location)
+            .body(personService.save(person));
   }
 
   @PostMapping(path = "/{personId}/addresses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<List<AddressResource>> addAddress(
+  public ResponseEntity<List<Address>> addAddress(
       @PathVariable("personId") UUID personIdentifier,
-      @RequestBody AddressResource addressResource) {
+      @RequestBody Address address) {
 
     Person person = personService.findOneByIdentifier(personIdentifier);
     if (person == null) {
       return ResponseEntity.notFound().build();
     }
 
-    Address address = modelMapper.map(addressResource, Address.class);
     if (address.getIdentifier() == null) {
       address.setIdentifier(UUID.randomUUID());
     }
     person.getAddresses().add(address);
-    return ResponseEntity.ok(
-        personService.save(person).getAddresses().stream()
-            .map(a -> modelMapper.map(a, AddressResource.class))
-            .collect(Collectors.toList()));
+
+    URI location =
+            ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/persons")
+                    .path("/{personId}")
+                    .path("/addresses")
+                    .buildAndExpand(person.getIdentifier())
+                    .toUri();
+
+    return ResponseEntity.created(location)
+            .body(personService.save(person).getAddresses());
   }
 
   @DeleteMapping("/{personId}")

@@ -1,7 +1,6 @@
 package com.example.api;
 
 import com.example.service.PersonService;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,8 @@ public class PersonRestController {
 
   private final PersonService personService;
 
-  private final ModelMapper modelMapper;
-
   @Autowired
-  public PersonRestController(PersonService personService, ModelMapper modelMapper) {
+  public PersonRestController(PersonService personService) {
     this.personService = personService;
-    this.modelMapper = modelMapper;
   }
 }

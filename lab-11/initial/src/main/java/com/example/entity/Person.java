@@ -61,6 +61,22 @@ public class Person extends AbstractPersistable<Long> {
     return addresses;
   }
 
+  public void setIdentifier(UUID identifier) {
+    this.identifier = identifier;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public void setAddresses(List<Address> addresses) {
+    this.addresses = addresses;
+  }
+
   @Override
   public String toString() {
     return new org.apache.commons.lang3.builder.ToStringBuilder(

@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -58,6 +59,18 @@ public class Address extends AbstractPersistable<Long> {
     this.country = country;
     this.email = email;
     this.phone = phone;
+  }
+
+  @JsonIgnore
+  @Override
+  public boolean isNew() {
+    return super.isNew();
+  }
+
+  @JsonIgnore
+  @Override
+  public Long getId() {
+    return super.getId();
   }
 
   public UUID getIdentifier() {
