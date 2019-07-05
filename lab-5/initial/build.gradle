@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springVersion = '5.1.5.RELEASE'
+        springVersion = '5.1.8.RELEASE'
     }
 }
 
